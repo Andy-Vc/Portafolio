@@ -11,12 +11,20 @@ import { ScrollToSectionDirective } from '../../shared/directives/scroll-to-sect
 })
 export class NavbarComponent {
   readonly links = NAV_LINKS;
+
   readonly scrolled = signal(false);
   readonly menuOpen = signal(false);
 
   @HostListener('window:scroll')
   onWindowScroll(): void {
-    this.scrolled.set(window.scrollY > 20);
+    this.scrolled.set(window.scrollY > 16);
+  }
+
+  @HostListener('window:resize')
+  onResize(): void {
+    if (window.innerWidth >= 1024) {
+      this.closeMenu();
+    }
   }
 
   toggleMenu(): void {

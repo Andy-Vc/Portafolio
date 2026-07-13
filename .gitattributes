@@ -1,0 +1,29 @@
+###############################################################################
+# Line endings
+###############################################################################
+
+* text=auto eol=lf
+
+###############################################################################
+# GitHub Linguist - Angular
+###############################################################################
+
+# Dependencias
+node_modules/** linguist-vendored
+.angular/** linguist-vendored
+
+# Archivos de compilación
+dist/** linguist-vendored
+coverage/** linguist-vendored
+
+# Archivos generados
+package-lock.json linguist-generated
+pnpm-lock.yaml linguist-generated
+yarn.lock linguist-generated
+
+# Source maps
+*.map linguist-generated
+
+# Archivos minificados
+*.min.js linguist-vendored
+*.min.css linguist-vendored

@@ -15,39 +15,80 @@
     </p>
   </div>
 
-  <div class="grid gap-4 xl:grid-cols-2">
-    @for (group of groups; track group.title) {
-      <article class="stagger-item rounded-[1.5rem] border border-surface-border bg-surface-card p-6">
-        <div class="flex items-start justify-between gap-4">
-          <div>
-            <h3 class="text-lg font-semibold text-foreground-primary">
-              @if (group.title === 'Frontend') { 💻 }
-              @else if (group.title === 'Backend') { ⚙️ }
-              @else if (group.title === 'Bases de datos') { 🗄️ }
-              @else if (group.title === 'DevOps') { 🐳 }
-              @else if (group.title === 'Mobile') { 📱 }
-              @else { 🛠️ }
-              <span class="ml-2">{{ group.title }}</span>
-            </h3>
-            <p class="mt-2 text-sm leading-6 text-foreground-secondary">{{ group.description }}</p>
+ <div class="grid gap-4 xl:grid-cols-2">
+  @for (group of groups; track group.title) {
+    <article class="stagger-item rounded-[1.5rem] border border-surface-border bg-surface-card p-6 transition-colors duration-300">
+      <div class="flex items-start justify-between gap-4">
+        <div class="flex items-start gap-3.5">
+          <div [class]="groupAccentClasses(group.title)">
+            @switch (group.title) {
+              @case ('Frontend') {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+                  <rect x="3" y="4" width="18" height="16" rx="2.2"/>
+                  <line x1="3" y1="9" x2="21" y2="9"/>
+                  <circle cx="6" cy="6.5" r="0.6" fill="currentColor" stroke="none"/>
+                  <circle cx="8.4" cy="6.5" r="0.6" fill="currentColor" stroke="none"/>
+                </svg>
+              }
+              @case ('Backend') {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+                  <rect x="3.5" y="4" width="17" height="7" rx="1.6"/>
+                  <rect x="3.5" y="13" width="17" height="7" rx="1.6"/>
+                  <circle cx="7.2" cy="7.5" r="0.9" fill="currentColor" stroke="none"/>
+                  <circle cx="7.2" cy="16.5" r="0.9" fill="currentColor" stroke="none"/>
+                </svg>
+              }
+              @case ('Bases de datos') {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+                  <ellipse cx="12" cy="6" rx="8" ry="3"/>
+                  <path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6"/>
+                  <path d="M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/>
+                </svg>
+              }
+              @case ('DevOps') {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+                  <path d="M12 3 3 8v8l9 5 9-5V8z"/>
+                  <path d="M3 8l9 5 9-5"/>
+                  <path d="M12 13v8"/>
+                </svg>
+              }
+              @case ('Mobile') {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+                  <rect x="7" y="2.5" width="10" height="19" rx="2"/>
+                  <line x1="10.5" y1="18.5" x2="13.5" y2="18.5"/>
+                </svg>
+              }
+              @default {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-5 w-5">
+                  <line x1="4" y1="6" x2="20" y2="6"/>
+                  <circle cx="9" cy="6" r="2"/>
+                  <line x1="4" y1="12" x2="20" y2="12"/>
+                  <circle cx="15" cy="12" r="2"/>
+                  <line x1="4" y1="18" x2="20" y2="18"/>
+                  <circle cx="9" cy="18" r="2"/>
+                </svg>
+              }
+            }
           </div>
-          <span class="rounded-full border border-surface-border px-3 py-1 text-xs text-foreground-muted">
-            {{ group.items.length }}
-          </span>
+          <div>
+            <h3 class="text-lg font-semibold text-foreground-primary">{{ group.title }}</h3>
+            <p class="mt-1.5 max-w-[32ch] text-sm leading-6 text-foreground-secondary">{{ group.description }}</p>
+          </div>
         </div>
+        <span class="shrink-0 rounded-full border border-surface-border px-2.5 py-1 font-mono text-[11px] text-foreground-muted">
+          {{ group.items.length.toString().padStart(2, '0') }}
+        </span>
+      </div>
 
-        <div class="mt-5 grid gap-3 sm:grid-cols-2">
-          @for (item of group.items; track item.name) {
-            <article class="flex items-center gap-3 rounded-2xl border border-surface-border bg-surface-secondary px-4 py-3 transition duration-200 hover:-translate-y-0.5 hover:bg-surface-card">
-              <app-tech-icon [key]="item.iconKey || ''" [fallback]="item.icon"></app-tech-icon>
-              <div class="min-w-0">
-                <p class="text-sm font-medium text-foreground-primary">{{ item.name }}</p>
-                <p class="text-[11px] uppercase tracking-[0.2em] text-foreground-muted">{{ item.category }}</p>
-              </div>
-            </article>
-          }
-        </div>
-      </article>
-    }
-  </div>
+      <div class="mt-5 grid gap-2.5 sm:grid-cols-2">
+        @for (item of group.items; track item.name) {
+          <article class="flex items-center gap-3 rounded-xl border border-surface-border bg-surface-secondary px-3.5 py-2.5 transition-all duration-200 hover:border-foreground-muted/30 hover:bg-surface-card hover:-translate-y-0.5">
+            <app-tech-icon [key]="item.iconKey || ''" [fallback]="item.icon"></app-tech-icon>
+            <p class="truncate text-sm font-medium text-foreground-primary">{{ item.name }}</p>
+          </article>
+        }
+      </div>
+    </article>
+  }
+</div>
 </section>
