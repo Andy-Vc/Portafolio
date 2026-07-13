@@ -1,0 +1,23 @@
+<footer class="border-t border-surface-border bg-surface-secondary/70">
+  <div class="mx-auto flex max-w-7xl flex-col gap-6 px-4 py-10 sm:px-6 lg:flex-row lg:items-center lg:justify-between lg:px-8">
+    <div>
+      <p class="text-sm font-semibold text-foreground-primary">Portfolio</p>
+      <p class="mt-2 text-sm text-foreground-muted">Diseñado para transmitir profesionalismo, claridad y calidad premium.</p>
+    </div>
+
+    <div class="flex flex-wrap items-center gap-3">
+      @for (social of socials; track social.label) {
+        <a
+          [href]="social.href"
+          class="rounded-full border border-surface-border bg-surface-card/80 px-4 py-2 text-sm text-foreground-secondary transition duration-300 hover:border-brand/40 hover:text-foreground-primary focus-ring"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {{ social.label }}
+        </a>
+      }
+    </div>
+
+    <p class="text-sm text-foreground-muted">© {{ year }} Portfolio. Todos los derechos reservados.</p>
+  </div>
+</footer>

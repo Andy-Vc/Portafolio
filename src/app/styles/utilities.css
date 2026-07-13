@@ -1,0 +1,33 @@
+.glass-panel {
+  background: #18181b;
+  border: 1px solid #27272a;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(8px);
+}
+
+.soft-border {
+  border: 1px solid #27272a;
+}
+
+.section-shell {
+  padding-block: var(--section-gap);
+}
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.focus-ring:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.35);
+}
+
+.glow-button {
+  box-shadow: none;
+}
+
+.surface-grid {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-size: 48px 48px;
+}

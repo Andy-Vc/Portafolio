@@ -1,0 +1,31 @@
+@keyframes soft-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes gentle-pulse {
+  0%,
+  100% {
+    opacity: 0.55;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.85;
+    transform: scale(1.04);
+  }
+}
+
+.animate-soft-float {
+  animation: soft-float 8s ease-in-out infinite;
+}
+
+.animate-gentle-pulse {
+  animation: gentle-pulse 6s ease-in-out infinite;
+}

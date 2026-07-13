@@ -1,0 +1,53 @@
+<section
+  id="stack-principal"
+  class="section-shell"
+  appRevealOnScroll
+  (appRevealOnScroll)="visible.set(true)"
+  [@staggerReveal]="visible() ? 'visible' : 'hidden'"
+>
+  <div class="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+    <div>
+      <p class="text-sm font-medium uppercase tracking-[0.45em] text-foreground-muted">Stack Principal</p>
+      <h2 class="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Tecnologías que manejo agrupadas por área.</h2>
+    </div>
+    <p class="max-w-2xl text-sm leading-7 text-foreground-secondary">
+      Esta es la sección clave para que en menos de diez segundos quede claro el stack que domino.
+    </p>
+  </div>
+
+  <div class="grid gap-4 xl:grid-cols-2">
+    @for (group of groups; track group.title) {
+      <article class="stagger-item rounded-[1.5rem] border border-surface-border bg-surface-card p-6">
+        <div class="flex items-start justify-between gap-4">
+          <div>
+            <h3 class="text-lg font-semibold text-foreground-primary">
+              @if (group.title === 'Frontend') { 💻 }
+              @else if (group.title === 'Backend') { ⚙️ }
+              @else if (group.title === 'Bases de datos') { 🗄️ }
+              @else if (group.title === 'DevOps') { 🐳 }
+              @else if (group.title === 'Mobile') { 📱 }
+              @else { 🛠️ }
+              <span class="ml-2">{{ group.title }}</span>
+            </h3>
+            <p class="mt-2 text-sm leading-6 text-foreground-secondary">{{ group.description }}</p>
+          </div>
+          <span class="rounded-full border border-surface-border px-3 py-1 text-xs text-foreground-muted">
+            {{ group.items.length }}
+          </span>
+        </div>
+
+        <div class="mt-5 grid gap-3 sm:grid-cols-2">
+          @for (item of group.items; track item.name) {
+            <article class="flex items-center gap-3 rounded-2xl border border-surface-border bg-surface-secondary px-4 py-3 transition duration-200 hover:-translate-y-0.5 hover:bg-surface-card">
+              <app-tech-icon [key]="item.iconKey || ''" [fallback]="item.icon"></app-tech-icon>
+              <div class="min-w-0">
+                <p class="text-sm font-medium text-foreground-primary">{{ item.name }}</p>
+                <p class="text-[11px] uppercase tracking-[0.2em] text-foreground-muted">{{ item.category }}</p>
+              </div>
+            </article>
+          }
+        </div>
+      </article>
+    }
+  </div>
+</section>
