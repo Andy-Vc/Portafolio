@@ -1,0 +1,15 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <rect width="64" height="64" rx="16" fill="#09090B"/>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="14.5" fill="none" stroke="#27272A" stroke-width="1.5"/>
+  <text
+    x="32"
+    y="34"
+    font-family="Inter, -apple-system, Segoe UI, Helvetica, Arial, sans-serif"
+    font-size="22"
+    font-weight="600"
+    letter-spacing="1"
+    fill="#818CF8"
+    text-anchor="middle"
+    dominant-baseline="middle"
+  >AV</text>
+</svg>

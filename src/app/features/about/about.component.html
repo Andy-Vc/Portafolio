@@ -15,16 +15,42 @@
       </p>
     </div>
 
-    <div class="grid gap-4 sm:grid-cols-2">
-      @for (highlight of highlights; track highlight.title) {
-        <article class="glass-panel stagger-item rounded-3xl p-6 transition duration-300 hover:-translate-y-1 hover:border-brand/30">
-          <p class="text-xs uppercase tracking-[0.3em] text-foreground-muted">{{ highlight.title }}</p>
-          <p class="mt-3 text-2xl font-semibold text-foreground-primary">{{ highlight.value }}</p>
-          <p class="mt-3 text-sm leading-6 text-foreground-secondary">{{ highlight.description }}</p>
-        </article>
-      }
+    <div class="grid gap-4">
+      <div class="grid gap-4 sm:grid-cols-3">
+        @for (highlight of highlights; track highlight.title) {
+          <article class="glass-panel stagger-item rounded-3xl p-6 transition duration-300 hover:-translate-y-1 hover:border-brand/30">
+            <div class="flex h-9 w-9 items-center justify-center rounded-xl border border-brand/20 bg-brand/10 text-brand">
+              @switch (highlight.title) {
+                @case ('Formación') {
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-4.5 w-4.5">
+                    <path d="M2 8l10-5 10 5-10 5z"/>
+                    <path d="M6 10.5V16c0 1.4 2.7 2.5 6 2.5s6-1.1 6-2.5v-5.5"/>
+                    <path d="M22 8v6"/>
+                  </svg>
+                }
+                @case ('Enfoque') {
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-4.5 w-4.5">
+                    <polyline points="8 6 3 12 8 18"/>
+                    <polyline points="16 6 21 12 16 18"/>
+                  </svg>
+                }
+                @case ('Interés') {
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" class="h-4.5 w-4.5">
+                    <polygon points="12 2 2 8.5 12 15 22 8.5 12 2"/>
+                    <polyline points="2 15.5 12 22 22 15.5"/>
+                    <polyline points="2 12 12 18.5 22 12"/>
+                  </svg>
+                }
+              }
+            </div>
+            <p class="mt-4 text-xs uppercase tracking-[0.3em] text-foreground-muted">{{ highlight.title }}</p>
+            <p class="mt-2 text-lg font-semibold leading-tight text-foreground-primary">{{ highlight.value }}</p>
+            <p class="mt-3 text-sm leading-6 text-foreground-secondary">{{ highlight.description }}</p>
+          </article>
+        }
+      </div>
 
-      <article class="glass-panel rounded-3xl p-6 sm:col-span-2">
+      <article class="glass-panel rounded-3xl p-6">
         <div class="flex flex-wrap items-center justify-between gap-4">
           <div>
             <p class="text-xs uppercase tracking-[0.3em] text-foreground-muted">Filosofía</p>

@@ -27,3 +27,7 @@ yarn.lock linguist-generated
 # Archivos minificados
 *.min.js linguist-vendored
 *.min.css linguist-vendored
+
+# Templates: se excluyen del cálculo de lenguajes para que TypeScript
+# se refleje como el lenguaje dominante del repositorio
+*.html linguist-generated=true

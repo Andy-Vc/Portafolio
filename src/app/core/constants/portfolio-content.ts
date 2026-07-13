@@ -29,41 +29,50 @@ export interface SkillItem {
   badge: string;
 }
 
+export interface ProjectMedia {
+  type: 'image' | 'video';
+  src: string;
+  poster?: string; 
+  alt: string;
+}
+
 export interface ProjectItem {
   title: string;
+  period: string;
   description: string;
   stack: string[];
-  github: string;
-  demo: string;
+  features: string[];
+  media?: ProjectMedia;
+  github?: string;
   accent: string;
 }
 
-export interface ExperienceItem {
+export interface ExperienceProject {
+  title: string;
   period: string;
-  role: string;
-  company: string;
-  summary: string;
   achievements: string[];
+  technologies?: string[];
 }
 
-export interface CertificateItem {
+export interface ExperienceItem {
+  role: string;
+  company: string;
+  period: string;
+  projects: ExperienceProject[];
+}
+
+export interface CertificationItem {
   title: string;
   issuer: string;
-  year: string;
-  focus: string;
+  date: string;
+  category:string;
+  credentialUrl?: string;
 }
 
 export interface SocialLink {
   label: string;
   href: string;
-  icon: 'github' | 'linkedin' | 'mail';
-}
-
-export interface GitHubRepo {
-  name: string;
-  description: string;
-  stack: string[];
-  url: string;
+  icon: 'github' | 'linkedin' | 'email';
 }
 
 export const NAV_LINKS: NavLink[] = [
@@ -72,21 +81,17 @@ export const NAV_LINKS: NavLink[] = [
   { label: 'Sobre mí', href: '#sobre-mi' },
   { label: 'Experiencia', href: '#experiencia' },
   { label: 'Proyectos', href: '#proyectos' },
-  { label: 'GitHub', href: '#github' },
+  { label: 'Certificados', href: '#certificados' },
   { label: 'Contacto', href: '#contacto' },
 ];
 
 export const SOCIAL_LINKS: SocialLink[] = [
+  { label: 'Correo', href: 'mailto:tu-correo@ejemplo.com', icon: 'email' },
   { label: 'GitHub', href: 'https://github.com/Andy-Vc', icon: 'github' },
   {
     label: 'LinkedIn',
     href: 'https://linkedin.com/in/andy-valdivia-centeno-111222338',
     icon: 'linkedin',
-  },
-  {
-    label: 'CV',
-    href: 'assets/documents/CV_Andy_Valdivia.pdf',
-    icon: 'mail',
   },
 ];
 
@@ -95,19 +100,19 @@ export const HIGHLIGHTS: HighlightItem[] = [
     title: 'Formación',
     value: 'Computación e Informática',
     description:
-      'Egresado con base en análisis, programación y diseño de soluciones web.',
+      'Base sólida en análisis, algoritmos y diseño de soluciones web desde el pregrado.',
   },
   {
     title: 'Enfoque',
-    value: 'Full Stack Developer',
+    value: 'Desarrollo end-to-end',
     description:
-      'Java, Spring Boot, Angular y PostgreSQL como base principal de trabajo.',
+      'Desde el diseño de la API hasta la interfaz, cuidando cada capa del sistema.',
   },
   {
     title: 'Interés',
-    value: 'Arquitectura',
+    value: 'Arquitectura escalable',
     description:
-      'Microservicios, buenas prácticas, escalabilidad y desarrollo backend.',
+      'Microservicios, patrones de diseño y buenas prácticas pensadas para crecer.',
   },
 ];
 
@@ -269,88 +274,115 @@ export const STACK_GROUPS: StackGroup[] = [
 export const PROJECTS: ProjectItem[] = [
   {
     title: 'Aventuria',
+    period: 'Mayo 2026',
     description:
-      'Plataforma de reservas con enfoque multi tenant, autenticación robusta y flujo de operaciones.',
-    stack: [
-      'Angular',
-      'Spring Boot',
-      'PostgreSQL',
-      'Docker',
-      'Redis',
-      'RabbitMQ',
-      'Cloudinary',
+      'SaaS de reservas hoteleras desarrollado de extremo a extremo en un mes, junto al líder técnico, y desplegado en producción.',
+    stack: ['Angular', 'Spring Boot', 'Neon (PostgreSQL)', 'Cloudinary', 'Render', 'Vercel', 'Spring Mail'],
+    features: [
+      'Autenticación con verificación por código de 6 dígitos al correo',
+      'Almacenamiento de imágenes y videos con Cloudinary',
+      'Notificaciones y comprobantes automáticos por correo',
+      'Backend en Render y frontend en Vercel, en producción',
     ],
+    media: {
+      type: 'video',
+      src: 'https://res.cloudinary.com/tu-cloud/video/upload/aventuria-demo.mp4',
+      alt: 'Flujo de reserva en Aventuria',
+    },
     github: 'https://github.com/your-username/aventuria',
-    demo: '#contacto',
     accent: 'bg-[#121214]',
   },
   {
-    title: 'Clinic Hub',
+    title: "KoroFood's",
+    period: 'Enero 2026 — Febrero 2026',
     description:
-      'Sistema clínico con módulos administrativos, seguridad por roles y trazabilidad de procesos.',
-    stack: ['Java', 'Spring Security', 'Angular', 'MySQL', 'JWT', 'Docker'],
-    github: 'https://github.com/your-username/clinichub',
-    demo: '#contacto',
+      'Sistema de gestión de restaurante con arquitectura de microservicios, desarrollado en equipo bajo metodología Scrum.',
+    stack: ['Angular', 'Spring Boot', 'PostgreSQL', 'RabbitMQ', 'Redis', 'Docker'],
+    features: [
+      'Chat en tiempo real entre clientes y recepcionistas con WebSockets',
+      'Mensajería asíncrona entre microservicios con RabbitMQ',
+      'Caché con Redis para reducir carga en base de datos',
+      'Proyecto contenerizado completo con Docker',
+    ],
+    media: {
+      type: 'video',
+      src: 'https://res.cloudinary.com/tu-cloud/video/upload/korofoods-chat.mp4',
+      alt: 'Chat en tiempo real en KoroFood\'s',
+    },
+    github: 'https://github.com/your-username/korofoods',
     accent: 'bg-[#141416]',
   },
   {
-    title: 'Inventory Control',
+    title: 'GreenGuardian',
+    period: 'Noviembre 2025 — Diciembre 2025',
     description:
-      'Panel de control para inventario con métricas operativas, integración de archivos y filtros.',
-    stack: ['Angular', 'Node.js', 'MongoDB', 'Cloudinary', 'GitHub Actions'],
-    github: 'https://github.com/your-username/inventory-control',
-    demo: '#contacto',
+      'Aplicación Android para reportar incidentes ambientales, con clasificación automática de imágenes mediante Machine Learning.',
+    stack: ['Android (Kotlin)', 'Spring Boot', 'Python', 'Machine Learning'],
+    features: [
+      'Escaneo y clasificación automática de incidentes por imagen',
+      'Backend RESTful para gestión de reportes y usuarios',
+      'Modelo de ML en Python integrado al flujo de la app',
+      'Coordinación multidisciplinaria bajo Scrum y Trello',
+    ],
+    media: {
+      type: 'image',
+      src: 'assets/images/projects/greenguardian.jpg',
+      alt: 'Pantalla de clasificación de incidentes en GreenGuardian',
+    },
+    github: 'https://github.com/your-username/greenguardian',
     accent: 'bg-[#121214]',
   },
 ];
 
 export const EXPERIENCE: ExperienceItem[] = [
   {
-    period: '2024 — Presente',
-    role: 'Full Stack Developer',
-    company: 'Proyectos web y productos internos',
-    summary:
-      'Desarrollo de aplicaciones web con Java, Spring Boot y Angular, priorizando arquitectura y buenas prácticas.',
-    achievements: [
-      'Implementación de APIs REST, autenticación JWT y flujos por roles.',
-      'Composición de interfaces con Angular y Tailwind CSS.',
-      'Trabajo con Docker, PostgreSQL y despliegue reproducible.',
-    ],
-  },
-  {
-    period: '2022 — 2024',
-    role: 'Frontend Developer',
-    company: 'Equipos de producto',
-    summary:
-      'Construcción de interfaces SPA con foco en mantenimiento, accesibilidad y claridad visual.',
-    achievements: [
-      'Estandarización de componentes y patrones UI.',
-      'Aplicación de responsive-first y accesibilidad básica.',
-      'Uso de RxJS y Angular para flujos reactivos.',
+    role: 'Practicante Desarrollador Full Stack',
+    company: 'DevCloudPerú',
+    period: 'Mayo 2026 — Junio 2026',
+    projects: [
+      {
+        title: 'SaaS de reservas "Aventuria"',
+        period: 'Mayo 2026',
+        achievements: [
+          'Desarrollé de extremo a extremo el SaaS (Angular + Spring Boot) en un mes, junto al líder técnico.',
+          'Implementé autenticación con verificación por código al correo, e integré Neon y Cloudinary.',
+          'Desplegué el producto en producción (backend en Render, frontend en Vercel).',
+        ],
+        technologies: ['Spring Boot', 'Angular', 'Neon (PostgreSQL)', 'Cloudinary', 'Render', 'Vercel', 'Spring Mail'],
+      },
+      {
+        title: 'Soporte — Sistema MediVes, Clínica Vesalio',
+        period: 'Junio 2026',
+        achievements: [
+          'Capacité presencialmente a los doctores en el uso del nuevo sistema.',
+          'Recopilé feedback de usuarios finales y lo reporté al equipo de desarrollo.',
+          'Colaboré en el manual de usuario y el glosario del sistema.',
+        ],
+      },
     ],
   },
 ];
 
-export const GITHUB_REPOS: GitHubRepo[] = [
+export const CERTIFICATIONS: CertificationItem[] = [
   {
-    name: 'Aventuria',
-    description:
-      'Proyecto de reservas con autenticación, roles y arquitectura preparada para escalar.',
-    stack: ['Angular', 'Spring Boot', 'PostgreSQL', 'Docker'],
-    url: 'https://github.com/your-username/aventuria',
+    title: 'SQL - BASE DE DATOS 2 + IA',
+    issuer: 'Programa de Iniciación Tecnológica PIT - 2025',
+    date: '2025',
+    category: 'Bases de datos',
+    credentialUrl: '/assets/documents/certificado-bd.pdf',
   },
   {
-    name: 'Clinic Hub',
-    description:
-      'Sistema administrativo orientado a operaciones internas y control de procesos.',
-    stack: ['Java', 'Angular', 'JWT', 'MySQL'],
-    url: 'https://github.com/your-username/clinichub',
+    title: 'FUNDAMENTOS DE DEVOPS: DOCKERS',
+    issuer: 'Programa de Iniciación Tecnológica PIT - 2025',
+    date: '2025',
+    category: 'DevOps',
+    credentialUrl: '/assets/documents/certificado-docker.pdf',
   },
   {
-    name: 'Inventory Control',
-    description:
-      'Panel operativo para inventario con flujos de gestión y almacenamiento de archivos.',
-    stack: ['Angular', 'Node.js', 'MongoDB'],
-    url: 'https://github.com/your-username/inventory-control',
+    title: 'CLOUD COMPUTING: AWS - AZURE - GOOGLE CLOUD',
+    issuer: 'Programa de Iniciación Tecnológica PIT - 2025',
+    date: '2025',
+    category: 'Cloud',
+    credentialUrl: '/assets/documents/certificado-cloud.pdf',
   },
 ];

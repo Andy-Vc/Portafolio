@@ -9,53 +9,64 @@
         <button type="button" appScrollToSection="inicio" class="group flex items-center gap-4 py-3 focus-ring"
             aria-label="Ir al inicio">
             <div
-                class="flex h-12 w-12 items-center justify-center rounded-2xl border border-surface-border bg-surface-card font-semibold tracking-[0.22em] text-brand transition-all duration-300 group-hover:scale-105 group-hover:border-brand/40">
+                class="relative flex h-12 w-12 items-center justify-center rounded-2xl border border-surface-border bg-surface-card font-semibold tracking-[0.22em] text-brand transition-all duration-300 group-hover:scale-105 group-hover:border-brand/40">
                 AV
+                <span
+                    class="absolute -bottom-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 border-surface-secondary bg-emerald-400"></span>
             </div>
             <div class="hidden sm:block">
-                <h2 class="text-sm font-semibold text-foreground-primary">
-                    Andy Valdivia
-                </h2>
-                <p class="mt-0.5 text-xs text-foreground-muted">
-                    Full Stack Developer
-                </p>
+                <h2 class="text-sm font-semibold text-foreground-primary">Andy Valdivia</h2>
+                <p class="mt-0.5 text-xs uppercase tracking-[0.3em] text-foreground-muted">Full Stack Dev</p>
             </div>
         </button>
         <nav
             class="hidden items-center gap-1 rounded-full border border-surface-border bg-surface-card/70 p-1 backdrop-blur-xl lg:flex">
             @for (link of links; track link.href) {
-            <button type="button" [appScrollToSection]="link.href.slice(1)"
-                class="rounded-full px-5 py-2.5 text-sm font-medium text-foreground-secondary transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand/10 hover:text-foreground-primary focus-ring">
+            <button type="button" [appScrollToSection]="link.href.slice(1)" class="relative inline-flex items-center justify-center rounded-full px-6 py-2.5
+                    text-sm font-medium
+                    transition-all duration-300 ease-out
+                    focus-ring" [ngClass]="
+                    activeSection() === link.href.slice(1)
+                    ? 'bg-brand/10 text-brand'
+                    : 'text-foreground-secondary hover:bg-surface-secondary hover:text-foreground-primary'
+                ">
+                <span class="absolute left-4 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-brand
+           transition-all duration-300 ease-out" [class.opacity-0]="activeSection() !== link.href.slice(1)"
+                    [class.scale-0]="activeSection() !== link.href.slice(1)"></span>
+
                 {{ link.label }}
             </button>
             }
         </nav>
-        <div class="flex items-center gap-3">
-            <button type="button"
-                class="relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-surface-border bg-surface-card transition-all duration-300 hover:border-brand/40 hover:bg-brand/10 lg:hidden focus-ring"
-                (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()" aria-controls="mobile-menu">
-                <div class="relative h-5 w-5">
-                    <span class="absolute left-0 top-1 h-0.5 w-5 rounded-full bg-current transition-all duration-300"
-                        [class.translate-y-2]="menuOpen()" [class.rotate-45]="menuOpen()"></span>
-                    <span class="absolute left-0 top-2.5 h-0.5 w-5 rounded-full bg-current transition-all duration-300"
-                        [class.opacity-0]="menuOpen()"></span>
-                    <span class="absolute left-0 top-4 h-0.5 w-5 rounded-full bg-current transition-all duration-300"
-                        [class.-translate-y-2]="menuOpen()" [class.-rotate-45]="menuOpen()"></span>
-                </div>
-            </button>
-        </div>
+        <button type="button"
+            class="relative inline-flex h-11 w-11 items-center justify-center rounded-full border border-surface-border bg-surface-card transition-all duration-300 hover:border-brand/40 hover:bg-brand/10 lg:hidden focus-ring"
+            (click)="toggleMenu()" [attr.aria-expanded]="menuOpen()" aria-controls="mobile-menu">
+            <div class="relative h-5 w-5">
+                <span class="absolute left-0 top-1 h-0.5 w-5 rounded-full bg-current transition-all duration-300"
+                    [class.translate-y-2]="menuOpen()" [class.rotate-45]="menuOpen()"></span>
+                <span class="absolute left-0 top-2.5 h-0.5 w-5 rounded-full bg-current transition-all duration-300"
+                    [class.opacity-0]="menuOpen()"></span>
+                <span class="absolute left-0 top-4 h-0.5 w-5 rounded-full bg-current transition-all duration-300"
+                    [class.-translate-y-2]="menuOpen()" [class.-rotate-45]="menuOpen()"></span>
+            </div>
+        </button>
     </div>
     <div id="mobile-menu" class="mx-auto mt-3 max-w-7xl overflow-hidden px-4 transition-all duration-300 lg:hidden"
-        [ngClass]="
-      menuOpen()
-        ? 'max-h-[500px] opacity-100'
-        : 'pointer-events-none max-h-0 opacity-0'
-    ">
+        [ngClass]="menuOpen() ? 'max-h-[600px] opacity-100' : 'pointer-events-none max-h-0 opacity-0'">
         <div class="rounded-3xl border border-surface-border bg-surface-card p-4 backdrop-blur-xl">
-            <nav class="grid gap-2">
+            <nav class="grid gap-2.5">
                 @for (link of links; track link.href) {
-                <button type="button" [appScrollToSection]="link.href.slice(1)" (click)="closeMenu()"
-                    class="rounded-2xl px-4 py-3 text-left text-sm font-medium text-foreground-secondary transition-all duration-300 hover:bg-brand/10 hover:text-foreground-primary">
+                <button type="button" [appScrollToSection]="link.href.slice(1)"
+                    class="relative rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-300 focus-ring"
+                    [ngClass]="
+                        activeSection() === link.href.slice(1)
+                        ? 'bg-brand/10 text-brand'
+                        : 'text-foreground-secondary hover:bg-surface-secondary hover:text-foreground-primary'
+                    ">
+                    <span
+                        class="absolute left-3 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-brand transition-all duration-300"
+                        [class.opacity-0]="activeSection() !== link.href.slice(1)"
+                        [class.scale-0]="activeSection() !== link.href.slice(1)"></span>
                     {{ link.label }}
                 </button>
                 }
