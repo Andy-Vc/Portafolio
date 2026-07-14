@@ -32,7 +32,15 @@ export interface SkillItem {
 export interface ProjectMedia {
   type: 'image' | 'video';
   src: string;
-  poster?: string; 
+  poster?: string;
+  alt: string;
+}
+
+export interface MediaItem {
+  type: 'image' | 'video';
+  src: string;
+  webpSrc?: string;
+  pngSrc?: string;
   alt: string;
 }
 
@@ -42,8 +50,8 @@ export interface ProjectItem {
   description: string;
   stack: string[];
   features: string[];
-  media?: ProjectMedia;
-  github?: string;
+  media: MediaItem[];
+  github: string;
   accent: string;
 }
 
@@ -65,7 +73,7 @@ export interface CertificationItem {
   title: string;
   issuer: string;
   date: string;
-  category:string;
+  category: string;
   credentialUrl?: string;
 }
 
@@ -277,18 +285,74 @@ export const PROJECTS: ProjectItem[] = [
     period: 'Mayo 2026',
     description:
       'SaaS de reservas hoteleras desarrollado de extremo a extremo en un mes, junto al líder técnico, y desplegado en producción.',
-    stack: ['Angular', 'Spring Boot', 'Neon (PostgreSQL)', 'Cloudinary', 'Render', 'Vercel', 'Spring Mail'],
+    stack: [
+      'Angular',
+      'Spring Boot',
+      'Neon (PostgreSQL)',
+      'Cloudinary',
+      'Render',
+      'Vercel',
+      'Spring Mail',
+    ],
     features: [
+      'Roles diferenciados: superadmin, administrador de hotel y usuario final',
+      'Dashboard de reportes con gráficos de ocupación y reservas',
+      'Gestión de hoteles, establecimientos y habitaciones desde el panel admin',
       'Autenticación con verificación por código de 6 dígitos al correo',
-      'Almacenamiento de imágenes y videos con Cloudinary',
       'Notificaciones y comprobantes automáticos por correo',
       'Backend en Render y frontend en Vercel, en producción',
     ],
-    media: {
-      type: 'video',
-      src: 'https://res.cloudinary.com/tu-cloud/video/upload/aventuria-demo.mp4',
-      alt: 'Flujo de reserva en Aventuria',
-    },
+    media: [
+      {
+        type: 'image',
+        src: 'assets/projects/aventuria/Inicio - Aventuria.avif',
+        webpSrc: 'assets/projects/aventuria/Inicio - Aventuria.webp',
+        pngSrc: 'assets/projects/aventuria/Inicio - Aventuria.png',
+        alt: 'Pantalla de Inicio',
+      },
+      {
+        type: 'image',
+        src: 'assets/projects/aventuria/Listado Hoteles - Aventuria.avif',
+        webpSrc: 'assets/projects/aventuria/Listado Hoteles - Aventuria.webp',
+        pngSrc: 'assets/projects/aventuria/Listado Hoteles - Aventuria.png',
+        alt: 'Listado de Hoteles',
+      },
+      {
+        type: 'image',
+        src: 'assets/projects/aventuria/Detalle Establecimiento - Aventuria.avif',
+        webpSrc: 'assets/projects/aventuria/Detalle Establecimiento - Aventuria.webp',
+        pngSrc: 'assets/projects/aventuria/Detalle Establecimiento - Aventuria.png',
+        alt: 'Detalle del Establecimiento',
+      },
+      {
+        type: 'image',
+        src: 'assets/projects/aventuria/Detalle Hotel - Aventuria.avif',
+        webpSrc: 'assets/projects/aventuria/Detalle Hotel - Aventuria.webp',
+        pngSrc: 'assets/projects/aventuria/Detalle Hotel - Aventuria.png',
+        alt: 'Detalle del Hotel',
+      },
+      {
+        type: 'image',
+        src: 'assets/projects/aventuria/SuperAdmin Dashboard - Aventuria.avif',
+        webpSrc: 'assets/projects/aventuria/SuperAdmin Dashboard - Aventuria.webp',
+        pngSrc: 'assets/projects/aventuria/SuperAdmin Dashboard - Aventuria.png',
+        alt: 'Dashboard del Super Admin',
+      },
+      {
+        type: 'image',
+        src: 'assets/projects/aventuria/AdminHotel Habitaciones - Aventuria.avif',
+        webpSrc: 'assets/projects/aventuria/AdminHotel Habitaciones - Aventuria.webp',
+        pngSrc: 'assets/projects/aventuria/AdminHotel Habitaciones - Aventuria.png',
+        alt: 'Habitaciones del Admin Hotel',
+      },
+      {
+        type: 'image',
+        src: 'assets/projects/aventuria/AdminHotel Reportes - Aventuria.avif',
+        webpSrc: 'assets/projects/aventuria/AdminHotel Reportes - Aventuria.webp',
+        pngSrc: 'assets/projects/aventuria/AdminHotel Reportes - Aventuria.png',
+        alt: 'Reportes del Admin Hotel',
+      },
+    ],
     github: 'https://github.com/your-username/aventuria',
     accent: 'bg-[#121214]',
   },
@@ -297,18 +361,27 @@ export const PROJECTS: ProjectItem[] = [
     period: 'Enero 2026 — Febrero 2026',
     description:
       'Sistema de gestión de restaurante con arquitectura de microservicios, desarrollado en equipo bajo metodología Scrum.',
-    stack: ['Angular', 'Spring Boot', 'PostgreSQL', 'RabbitMQ', 'Redis', 'Docker'],
+    stack: [
+      'Angular',
+      'Spring Boot',
+      'PostgreSQL',
+      'RabbitMQ',
+      'Redis',
+      'Docker',
+    ],
     features: [
       'Chat en tiempo real entre clientes y recepcionistas con WebSockets',
       'Mensajería asíncrona entre microservicios con RabbitMQ',
       'Caché con Redis para reducir carga en base de datos',
       'Proyecto contenerizado completo con Docker',
     ],
-    media: {
-      type: 'video',
-      src: 'https://res.cloudinary.com/tu-cloud/video/upload/korofoods-chat.mp4',
-      alt: 'Chat en tiempo real en KoroFood\'s',
-    },
+    media: [
+      {
+        type: 'video',
+        src: 'https://res.cloudinary.com/tu-cloud/video/upload/korofoods-chat.mp4',
+        alt: "Chat en tiempo real en KoroFood's",
+      },
+    ],
     github: 'https://github.com/your-username/korofoods',
     accent: 'bg-[#141416]',
   },
@@ -324,11 +397,13 @@ export const PROJECTS: ProjectItem[] = [
       'Modelo de ML en Python integrado al flujo de la app',
       'Coordinación multidisciplinaria bajo Scrum y Trello',
     ],
-    media: {
-      type: 'image',
-      src: 'assets/images/projects/greenguardian.jpg',
-      alt: 'Pantalla de clasificación de incidentes en GreenGuardian',
-    },
+    media: [
+      {
+        type: 'image',
+        src: 'assets/images/projects/greenguardian.jpg',
+        alt: 'Pantalla de clasificación de incidentes en GreenGuardian',
+      },
+    ],
     github: 'https://github.com/your-username/greenguardian',
     accent: 'bg-[#121214]',
   },
@@ -348,7 +423,15 @@ export const EXPERIENCE: ExperienceItem[] = [
           'Implementé autenticación con verificación por código al correo, e integré Neon y Cloudinary.',
           'Desplegué el producto en producción (backend en Render, frontend en Vercel).',
         ],
-        technologies: ['Spring Boot', 'Angular', 'Neon (PostgreSQL)', 'Cloudinary', 'Render', 'Vercel', 'Spring Mail'],
+        technologies: [
+          'Spring Boot',
+          'Angular',
+          'Neon (PostgreSQL)',
+          'Cloudinary',
+          'Render',
+          'Vercel',
+          'Spring Mail',
+        ],
       },
       {
         title: 'Soporte — Sistema MediVes, Clínica Vesalio',
@@ -384,5 +467,12 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '2025',
     category: 'Cloud',
     credentialUrl: '/assets/documents/certificado-cloud.pdf',
+  },
+  {
+    title: 'EGRESADO EN COMPUTACIÓN E INFORMÁTICA',
+    issuer: 'Cibertec - 2026',
+    date: '2026',
+    category: 'Logro académico',
+    credentialUrl: '/assets/documents/constancia-egresado.pdf',
   },
 ];

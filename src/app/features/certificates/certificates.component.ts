@@ -1,14 +1,17 @@
 import { Component, signal } from '@angular/core';
 import { staggerRevealAnimation } from '../../core/utils/portfolio-animations';
 import { RevealOnScrollDirective } from '../../shared/directives/reveal-on-scroll.directive';
-import { CertificationItem, CERTIFICATIONS } from '../../core/constants/portfolio-content';
+import {
+  CertificationItem,
+  CERTIFICATIONS,
+} from '../../core/constants/portfolio-content';
 
 @Component({
   selector: 'app-certificates',
   standalone: true,
   imports: [RevealOnScrollDirective],
   animations: [staggerRevealAnimation],
-  templateUrl: './certificates.component.html'
+  templateUrl: './certificates.component.html',
 })
 export class CertificatesComponent {
   readonly visible = signal(false);
@@ -23,6 +26,8 @@ export class CertificatesComponent {
         return `${base} border-cyan-400/20 bg-cyan-400/10 text-cyan-300`;
       case 'Cloud':
         return `${base} border-violet-400/20 bg-violet-400/10 text-violet-300`;
+      case 'Logro académico':
+        return `${base} border-amber-400/20 bg-amber-400/10 text-amber-300`;
       default:
         return `${base} border-surface-border bg-surface-secondary text-foreground-secondary`;
     }

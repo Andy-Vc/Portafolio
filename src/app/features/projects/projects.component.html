@@ -1,10 +1,5 @@
-<section
-  id="proyectos"
-  class="section-shell"
-  appRevealOnScroll
-  (appRevealOnScroll)="visible.set(true)"
-  [@staggerReveal]="visible() ? 'visible' : 'hidden'"
->
+<section id="proyectos" class="section-shell" appRevealOnScroll (appRevealOnScroll)="visible.set(true)"
+  [@staggerReveal]="visible() ? 'visible' : 'hidden'">
   <div class="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
     <div>
       <p class="text-sm font-medium uppercase tracking-[0.45em] text-foreground-muted">Proyectos</p>
@@ -17,157 +12,183 @@
 
   <div class="grid gap-5 xl:grid-cols-3">
     @for (project of projects; track project.title) {
-      <article class="stagger-item overflow-hidden rounded-[1.5rem] border border-surface-border bg-surface-card transition duration-300 hover:-translate-y-0.5 hover:border-brand/30">
-        @if (project.media) {
-          <div class="relative h-44 overflow-hidden border-b border-surface-border" [class]="project.accent">
-            @if (project.media.type === 'video') {
-              <video class="h-full w-full object-cover" [src]="project.media.src" autoplay muted loop playsinline></video>
-            } @else {
-              <img [src]="project.media.src" [alt]="project.media.alt" class="h-full w-full object-cover" />
-            }
-          </div>
+    <article
+      class="stagger-item overflow-hidden rounded-[1.5rem] border border-surface-border bg-surface-card transition duration-300 hover:-translate-y-0.5 hover:border-brand/30">
+      @if (project.media.length) {
+      <div class="relative h-44 overflow-y-auto scrollbar-hide border-b border-surface-border" [class]="project.accent">
+        @if (project.media[0].type === 'video') {
+        <video class="h-full w-full object-cover" [src]="project.media[0].src" autoplay muted loop playsinline></video>
+        } @else {
+        <img [src]="project.media[0].src" [alt]="project.media[0].alt" class="w-full h-auto object-top" />
         }
 
-        <div class="space-y-4 p-6">
-          <div class="flex items-start justify-between gap-3">
-            <h3 class="text-lg font-semibold text-foreground-primary">{{ project.title }}</h3>
-            <span class="mt-0.5 shrink-0 font-mono text-xs text-foreground-muted">{{ project.period }}</span>
-          </div>
+        @if (project.media.length > 1) {
+        <span class="absolute bottom-2 right-2 rounded-full bg-black/60 px-2 py-0.5 text-xs text-white">
+          +{{ project.media.length - 1 }}
+        </span>
+        }
+      </div>
+      }
 
-          <p class="line-clamp-2 text-sm leading-6 text-foreground-secondary">{{ project.description }}</p>
-
-          <div class="flex flex-wrap gap-2">
-            @for (item of stackPreview(project); track item) {
-              <span class="rounded-full border border-surface-border bg-surface-secondary px-3 py-1 text-xs text-foreground-secondary">
-                {{ item }}
-              </span>
-            }
-            @if (stackOverflow(project) > 0) {
-              <span class="rounded-full border border-surface-border bg-surface-secondary px-3 py-1 text-xs text-foreground-muted">
-                +{{ stackOverflow(project) }}
-              </span>
-            }
-          </div>
-
-          <div class="flex items-center gap-3 pt-1">
-            <button
-              type="button"
-              (click)="openProject(project, projectDialog)"
-              class="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-brand px-4 py-2.5 text-sm font-medium text-white transition duration-300 hover:bg-brand-hover focus-ring"
-            >
-              Ver detalles
-            </button>
-
-            @if (project.github) {
-              <a
-                [href]="project.github"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="Ver código en GitHub"
-                class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-surface-border text-foreground-primary transition duration-300 hover:border-brand/40 hover:bg-white/5 focus-ring"
-              >
-                <svg viewBox="0 0 24 24" fill="currentColor" class="h-4.5 w-4.5">
-                  <path d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.05 0-1.11.38-2.03 1-2.74-.1-.26-.44-1.31.1-2.72 0 0 .82-.27 2.7 1.05a9.14 9.14 0 0 1 4.92 0c1.87-1.32 2.69-1.05 2.69-1.05.54 1.41.2 2.46.1 2.72.63.71 1 1.63 1 2.74 0 3.92-2.34 4.79-4.57 5.04.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z"/>
-                </svg>
-              </a>
-            }
-          </div>
+      <div class="space-y-4 p-6">
+        <div class="flex items-start justify-between gap-3">
+          <h3 class="text-lg font-semibold text-foreground-primary">{{ project.title }}</h3>
+          <span class="mt-0.5 shrink-0 font-mono text-xs text-foreground-muted">{{ project.period }}</span>
         </div>
-      </article>
+
+        <p class="line-clamp-2 text-sm leading-6 text-foreground-secondary">{{ project.description }}</p>
+
+        <div class="flex flex-wrap gap-2">
+          @for (item of stackPreview(project); track item) {
+          <span
+            class="rounded-full border border-surface-border bg-surface-secondary px-3 py-1 text-xs text-foreground-secondary">
+            {{ item }}
+          </span>
+          }
+          @if (stackOverflow(project) > 0) {
+          <span
+            class="rounded-full border border-surface-border bg-surface-secondary px-3 py-1 text-xs text-foreground-muted">
+            +{{ stackOverflow(project) }}
+          </span>
+          }
+        </div>
+
+        <div class="flex items-center gap-3 pt-1">
+          <button type="button" (click)="openProject(project, projectDialog)"
+            class="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-brand px-4 py-2.5 text-sm font-medium text-white transition duration-300 hover:bg-brand-hover focus-ring">
+            Ver detalles
+          </button>
+
+          @if (project.github) {
+          <a [href]="project.github" target="_blank" rel="noopener noreferrer" aria-label="Ver código en GitHub"
+            class="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-surface-border text-foreground-primary transition duration-300 hover:border-brand/40 hover:bg-white/5 focus-ring">
+            <svg viewBox="0 0 24 24" fill="currentColor" class="h-4.5 w-4.5">
+              <path
+                d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49 0-.24-.01-1.04-.01-1.88-2.78.62-3.37-1.21-3.37-1.21-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.05 1.53 1.05.89 1.57 2.34 1.12 2.91.85.09-.66.35-1.12.63-1.38-2.22-.26-4.56-1.14-4.56-5.05 0-1.11.38-2.03 1-2.74-.1-.26-.44-1.31.1-2.72 0 0 .82-.27 2.7 1.05a9.14 9.14 0 0 1 4.92 0c1.87-1.32 2.69-1.05 2.69-1.05.54 1.41.2 2.46.1 2.72.63.71 1 1.63 1 2.74 0 3.92-2.34 4.79-4.57 5.04.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.81 0 .27.18.6.69.49A10.26 10.26 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z" />
+            </svg>
+          </a>
+          }
+        </div>
+      </div>
+    </article>
     }
   </div>
 </section>
 
-<dialog
-  #projectDialog
-  (close)="closeProject()"
-  class="m-auto h-[85vh] w-full max-w-6xl overflow-hidden rounded-[1.75rem] border border-surface-border bg-surface-card p-0 backdrop:bg-black/60 backdrop:backdrop-blur-sm"
->
+<dialog #projectDialog (close)="closeProject()"
+  class="m-auto h-[85vh] w-full max-w-7xl overflow-hidden rounded-[1.75rem] border border-surface-border bg-surface-card p-0 backdrop:bg-black/60 backdrop:backdrop-blur-sm">
   @if (selectedProject(); as project) {
-    <div class="grid h-full grid-rows-[auto_1fr] lg:grid-cols-[1.1fr_1fr] lg:grid-rows-1">
+  <div class="grid h-full grid-rows-[auto_1fr] lg:grid-cols-[1.6fr_1fr] lg:grid-rows-1">
+    <div class="relative h-64 border-b border-surface-border lg:h-full lg:border-b-0 lg:border-r overflow-hidden"
+      [class]="project.accent">
 
-      <!-- Columna izquierda: media -->
-      <div class="relative h-56 overflow-hidden border-b border-surface-border lg:h-full lg:border-b-0 lg:border-r" [class]="project.accent">
-        @if (project.media) {
-          @if (project.media.type === 'video') {
-            <video class="h-full w-full object-cover" [src]="project.media.src" autoplay muted loop playsinline controls></video>
-          } @else {
-            <img [src]="project.media.src" [alt]="project.media.alt" class="h-full w-full object-cover" />
-          }
+      <div #mediaScroll class="h-full w-full overflow-y-auto scrollbar-hide">
+        @if (project.media.length) {
+        @if (project.media[activeMediaIndex()].type === 'video') {
+        <video class="w-full h-auto object-top" [src]="project.media[activeMediaIndex()].src" autoplay muted loop
+          playsinline controls></video>
+        } @else {
+        <img [src]="project.media[activeMediaIndex()].src" [alt]="project.media[activeMediaIndex()].alt"
+          class="w-full h-auto object-top" />
         }
-
-        <button
-          type="button"
-          (click)="projectDialog.close()"
-          aria-label="Cerrar"
-          class="absolute right-4 top-4 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full border border-surface-border bg-surface-card/90 text-foreground-primary backdrop-blur-md transition duration-300 hover:border-brand/40 hover:bg-white/5 focus-ring lg:hidden"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
-            <line x1="5" y1="5" x2="19" y2="19"/>
-            <line x1="19" y1="5" x2="5" y2="19"/>
-          </svg>
-        </button>
+        }
       </div>
 
-      <!-- Columna derecha: contenido, con su propio scroll -->
-      <div class="relative flex flex-col overflow-hidden">
-        <button
-          type="button"
-          (click)="projectDialog.close()"
-          aria-label="Cerrar"
-          class="absolute right-4 top-4 z-10 hidden h-9 w-9 items-center justify-center rounded-full border border-surface-border bg-surface-card text-foreground-primary transition duration-300 hover:border-brand/40 hover:bg-white/5 focus-ring lg:inline-flex"
-        >
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
-            <line x1="5" y1="5" x2="19" y2="19"/>
-            <line x1="19" y1="5" x2="5" y2="19"/>
-          </svg>
-        </button>
+      @if (project.media.length) {
+      <div
+        class="absolute left-4 top-4 z-10 max-w-[calc(100%-5rem)] rounded-full bg-black/40 px-3.5 py-1.5 backdrop-blur-md">
+        <p class="truncate text-xs font-medium text-white">{{ project.media[activeMediaIndex()].alt }}</p>
+      </div>
+      }
 
-        <div class="flex-1 space-y-6 overflow-y-auto p-6 sm:p-8">
-          <div class="flex flex-wrap items-start justify-between gap-3 pr-10">
-            <h3 class="text-2xl font-semibold text-foreground-primary">{{ project.title }}</h3>
-            <span class="rounded-full border border-surface-border bg-surface-secondary px-3.5 py-1.5 font-mono text-xs text-foreground-muted">
-              {{ project.period }}
-            </span>
-          </div>
+      @if (project.media.length > 1) {
+      <button type="button" (click)="prevMedia(project)" aria-label="Anterior"
+        class="absolute left-4 top-1/2 -translate-y-1/2 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white shadow-lg backdrop-blur-md transition duration-200 hover:bg-black/60 hover:scale-105 focus-ring">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" class="h-5 w-5">
+          <polyline points="15 18 9 12 15 6" />
+        </svg>
+      </button>
+      <button type="button" (click)="nextMedia(project)" aria-label="Siguiente"
+        class="absolute right-4 top-1/2 -translate-y-1/2 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white shadow-lg backdrop-blur-md transition duration-200 hover:bg-black/60 hover:scale-105 focus-ring">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" class="h-5 w-5">
+          <polyline points="9 18 15 12 9 6" />
+        </svg>
+      </button>
 
-          <p class="text-sm leading-7 text-foreground-secondary">{{ project.description }}</p>
+      <div
+        class="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/40 px-3 py-2 backdrop-blur-md">
+        @for (item of project.media; track $index) {
+        <button type="button" (click)="setMedia($index)" [attr.aria-label]="'Ir a media ' + ($index + 1)"
+          class="h-1.5 rounded-full transition-all duration-300"
+          [class]="$index === activeMediaIndex() ? 'w-6 bg-white' : 'w-1.5 bg-white/50 hover:bg-white/80'"></button>
+        }
+      </div>
+      }
 
-          <div>
-            <p class="text-xs uppercase tracking-[0.3em] text-foreground-muted">Stack</p>
-            <div class="mt-3 flex flex-wrap gap-2">
-              @for (item of project.stack; track item) {
-                <span class="rounded-full border border-surface-border bg-surface-secondary px-3 py-1 text-xs text-foreground-secondary">
-                  {{ item }}
-                </span>
-              }
-            </div>
-          </div>
+      <button type="button" (click)="projectDialog.close()" aria-label="Cerrar"
+        class="absolute right-4 top-4 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full border border-surface-border bg-surface-card/90 text-foreground-primary backdrop-blur-md transition duration-300 hover:border-brand/40 hover:bg-white/5 focus-ring lg:hidden">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+          stroke-linejoin="round" class="h-4 w-4">
+          <line x1="5" y1="5" x2="19" y2="19" />
+          <line x1="19" y1="5" x2="5" y2="19" />
+        </svg>
+      </button>
+    </div>
+    <div class="relative flex flex-col overflow-hidden">
+      <button type="button" (click)="projectDialog.close()" aria-label="Cerrar"
+        class="absolute right-4 top-4 z-10 hidden h-9 w-9 items-center justify-center rounded-full border border-surface-border bg-surface-card text-foreground-primary transition duration-300 hover:border-brand/40 hover:bg-white/5 focus-ring lg:inline-flex">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+          stroke-linejoin="round" class="h-4 w-4">
+          <line x1="5" y1="5" x2="19" y2="19" />
+          <line x1="19" y1="5" x2="5" y2="19" />
+        </svg>
+      </button>
 
-          <div>
-            <p class="text-xs uppercase tracking-[0.3em] text-foreground-muted">Lo más relevante</p>
-            <ul class="mt-3 grid gap-2.5 text-sm leading-6 text-foreground-secondary">
-              @for (feature of project.features; track feature) {
-                <li class="flex gap-3">
-                  <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-light"></span>
-                  <span>{{ feature }}</span>
-                </li>
-              }
-            </ul>
-          </div>
-
-          @if (project.github) {
-            <a
-              [href]="project.github"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-flex w-full items-center justify-center gap-2 rounded-full border border-surface-border px-4 py-3 text-sm font-medium text-foreground-primary transition duration-300 hover:border-brand/40 hover:bg-white/5 focus-ring"
-            >
-              Ver código en GitHub
-            </a>
-          }
+      <div class="flex-1 space-y-6 overflow-y-auto p-6 sm:p-8">
+        <div class="flex flex-wrap items-start justify-between gap-3 pr-10">
+          <h3 class="text-2xl font-semibold text-foreground-primary">{{ project.title }}</h3>
+          <span
+            class="rounded-full border border-surface-border bg-surface-secondary px-3.5 py-1.5 font-mono text-xs text-foreground-muted">
+            {{ project.period }}
+          </span>
         </div>
+
+        <p class="text-sm leading-7 text-foreground-secondary">{{ project.description }}</p>
+
+        <div>
+          <p class="text-xs uppercase tracking-[0.3em] text-foreground-muted">Stack</p>
+          <div class="mt-3 flex flex-wrap gap-2">
+            @for (item of project.stack; track item) {
+            <span
+              class="rounded-full border border-surface-border bg-surface-secondary px-3 py-1 text-xs text-foreground-secondary">
+              {{ item }}
+            </span>
+            }
+          </div>
+        </div>
+
+        <div>
+          <p class="text-xs uppercase tracking-[0.3em] text-foreground-muted">Lo más relevante</p>
+          <ul class="mt-3 grid gap-2.5 text-sm leading-6 text-foreground-secondary">
+            @for (feature of project.features; track feature) {
+            <li class="flex gap-3">
+              <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-light"></span>
+              <span>{{ feature }}</span>
+            </li>
+            }
+          </ul>
+        </div>
+
+        @if (project.github) {
+        <a [href]="project.github" target="_blank" rel="noopener noreferrer"
+          class="inline-flex w-full items-center justify-center gap-2 rounded-full border border-surface-border px-4 py-3 text-sm font-medium text-foreground-primary transition duration-300 hover:border-brand/40 hover:bg-white/5 focus-ring">
+          Ver código en GitHub
+        </a>
+        }
       </div>
     </div>
+  </div>
   }
 </dialog>

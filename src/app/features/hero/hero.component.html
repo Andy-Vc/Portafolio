@@ -6,7 +6,8 @@
         <div class="space-y-6">
             <div class="flex flex-wrap items-center gap-3">
                 <p class="text-sm font-medium uppercase tracking-[0.45em] text-foreground-muted">Andy Valdivia</p>
-                <span class="inline-flex items-center gap-1.5 rounded-full border border-surface-border bg-surface-card px-3 py-1 text-xs font-medium text-foreground-secondary">
+                <span
+                    class="inline-flex items-center gap-1.5 rounded-full border border-surface-border bg-surface-card px-3 py-1 text-xs font-medium text-foreground-secondary">
                     <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
                     Disponible para nuevos proyectos
                 </span>
@@ -18,9 +19,10 @@
 
             <div class="flex flex-wrap gap-2">
                 @for (tech of ['Java', 'Spring Boot', 'Angular', 'PostgreSQL', 'Docker']; track tech) {
-                    <span class="rounded-full border border-surface-border bg-surface-card px-3.5 py-1.5 font-mono text-xs text-foreground-secondary">
-                        {{ tech }}
-                    </span>
+                <span
+                    class="rounded-full border border-surface-border bg-surface-card px-3.5 py-1.5 font-mono text-xs text-foreground-secondary">
+                    {{ tech }}
+                </span>
                 }
             </div>
 
@@ -35,9 +37,10 @@
             <button type="button" appScrollToSection="stack-principal"
                 class="inline-flex items-center justify-center gap-2 rounded-full bg-brand px-6 py-3.5 text-sm font-semibold text-white transition duration-300 hover:bg-brand-hover focus-ring">
                 Ver stack
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-4 w-4">
-                    <line x1="5" y1="12" x2="19" y2="12"/>
-                    <polyline points="12 5 19 12 12 19"/>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" class="h-4 w-4">
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
                 </svg>
             </button>
             <button type="button" appScrollToSection="contacto"
@@ -66,8 +69,12 @@
         <div class="rounded-[1.75rem] border border-surface-border bg-surface-card p-4 sm:p-5">
             <div class="grid gap-4">
                 <div class="overflow-hidden rounded-[1.5rem] border border-surface-border bg-surface-secondary">
-                    <img src="assets/images/profile2.jpeg" alt="Fotografía profesional de Andy Valdivia"
-                        class="aspect-[4/5] w-full object-cover object-center" />
+                    <picture>
+                        <source srcset="assets/images/profile2.avif" type="image/avif">
+                        <source srcset="assets/images/profile2.webp" type="image/webp">
+                        <img src="assets/images/profile2.png" alt="Fotografía profesional de Andy Valdivia"
+                            class="aspect-[4/5] w-full object-cover object-center">
+                    </picture>
                 </div>
                 <div class="grid gap-3 grid-cols-3">
                     <div class="rounded-2xl border border-surface-border bg-surface-secondary p-3.5 text-center">

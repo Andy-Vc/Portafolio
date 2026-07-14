@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, ViewChild, ElementRef } from '@angular/core';
 import { ProjectItem, PROJECTS } from '../../core/constants/portfolio-content';
 import { staggerRevealAnimation } from '../../core/utils/portfolio-animations';
 import { RevealOnScrollDirective } from '../../shared/directives/reveal-on-scroll.directive';
@@ -8,17 +8,19 @@ import { RevealOnScrollDirective } from '../../shared/directives/reveal-on-scrol
   standalone: true,
   imports: [RevealOnScrollDirective],
   animations: [staggerRevealAnimation],
-  templateUrl: './projects.component.html'
+  templateUrl: './projects.component.html',
 })
 export class ProjectsComponent {
   readonly visible = signal(false);
- readonly projects = PROJECTS;
+  readonly projects = PROJECTS;
   readonly selectedProject = signal<ProjectItem | null>(null);
+  readonly activeMediaIndex = signal(0);
 
-  private scrollY = 0;
+  @ViewChild('mediaScroll') mediaScrollRef?: ElementRef<HTMLDivElement>;
 
   openProject(project: ProjectItem, dialog: HTMLDialogElement): void {
     this.selectedProject.set(project);
+    this.activeMediaIndex.set(0);
     dialog.showModal();
     this.lockBodyScroll();
   }
@@ -26,6 +28,29 @@ export class ProjectsComponent {
   closeProject(): void {
     this.selectedProject.set(null);
     this.unlockBodyScroll();
+  }
+
+  nextMedia(project: ProjectItem): void {
+    const total = project.media.length;
+    this.activeMediaIndex.update((i) => (i + 1) % total);
+    this.resetMediaScroll();
+  }
+
+  prevMedia(project: ProjectItem): void {
+    const total = project.media.length;
+    this.activeMediaIndex.update((i) => (i - 1 + total) % total);
+    this.resetMediaScroll();
+  }
+
+  setMedia(index: number): void {
+    this.activeMediaIndex.set(index);
+    this.resetMediaScroll();
+  }
+
+  private resetMediaScroll(): void {
+    if (this.mediaScrollRef) {
+      this.mediaScrollRef.nativeElement.scrollTop = 0;
+    }
   }
 
   stackPreview(project: ProjectItem): string[] {
@@ -37,10 +62,10 @@ export class ProjectsComponent {
   }
 
   private lockBodyScroll(): void {
-  document.body.style.overflow = 'hidden';
-}
+    document.body.style.overflow = 'hidden';
+  }
 
-private unlockBodyScroll(): void {
-  document.body.style.overflow = '';
-}
+  private unlockBodyScroll(): void {
+    document.body.style.overflow = '';
+  }
 }
