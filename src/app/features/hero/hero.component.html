@@ -65,30 +65,33 @@
         </div>
     </div>
 
-    <div class="relative mx-auto w-full max-w-md lg:max-w-none">
-        <div class="rounded-[1.75rem] border border-surface-border bg-surface-card p-4 sm:p-5">
-            <div class="grid gap-4">
-                <div class="overflow-hidden rounded-[1.5rem] border border-surface-border bg-surface-secondary">
+    <div class="relative mx-auto w-full max-w-md lg:max-w-lg">
+        <div class="relative flex flex-col items-center gap-8">
+            <div class="relative">
+                <div class="absolute inset-0 -z-10 rounded-full bg-brand/50 blur-3xl scale-125"></div>
+                <div class="absolute inset-0 -z-10 rounded-full bg-brand/30 blur-2xl scale-110"></div>
+                <div
+                    class="relative h-80 w-80 overflow-hidden rounded-full border-4 border-brand/40 sm:h-96 sm:w-96 lg:h-[26rem] lg:w-[26rem]">
                     <picture>
                         <source srcset="assets/images/profile2.avif" type="image/avif">
                         <source srcset="assets/images/profile2.webp" type="image/webp">
                         <img src="assets/images/profile2.png" alt="Fotografía profesional de Andy Valdivia"
-                            class="aspect-[4/5] w-full object-cover object-center">
+                            class="h-full w-full object-cover object-center">
                     </picture>
                 </div>
-                <div class="grid gap-3 grid-cols-3">
-                    <div class="rounded-2xl border border-surface-border bg-surface-secondary p-3.5 text-center">
-                        <p class="text-xs uppercase tracking-[0.2em] text-foreground-muted">Egresado</p>
-                        <p class="mt-1.5 text-sm font-semibold text-foreground-primary">Computación</p>
-                    </div>
-                    <div class="rounded-2xl border border-surface-border bg-surface-secondary p-3.5 text-center">
-                        <p class="text-xs uppercase tracking-[0.2em] text-foreground-muted">Base</p>
-                        <p class="mt-1.5 text-sm font-semibold text-foreground-primary">Lima, PE</p>
-                    </div>
-                    <div class="rounded-2xl border border-surface-border bg-surface-secondary p-3.5 text-center">
-                        <p class="text-xs uppercase tracking-[0.2em] text-foreground-muted">Modo</p>
-                        <p class="mt-1.5 text-sm font-semibold text-foreground-primary">Remoto</p>
-                    </div>
+            </div>
+            <div class="grid w-full max-w-lg gap-4 grid-cols-3">
+                <div class="rounded-2xl border border-surface-border bg-surface-secondary p-5 text-center">
+                    <p class="text-xs uppercase tracking-[0.2em] text-foreground-muted">Egresado</p>
+                    <p class="mt-1.5 text-sm font-semibold text-foreground-primary">Computación</p>
+                </div>
+                <div class="rounded-2xl border border-surface-border bg-surface-secondary p-5 text-center">
+                    <p class="text-xs uppercase tracking-[0.2em] text-foreground-muted">Base</p>
+                    <p class="mt-1.5 text-sm font-semibold text-foreground-primary">Lima, PE</p>
+                </div>
+                <div class="rounded-2xl border border-surface-border bg-surface-secondary p-5 text-center">
+                    <p class="text-xs uppercase tracking-[0.2em] text-foreground-muted">Modo</p>
+                    <p class="mt-1.5 text-sm font-semibold text-foreground-primary">Remoto</p>
                 </div>
             </div>
         </div>

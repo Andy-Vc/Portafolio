@@ -22,18 +22,23 @@ async function convertFolder(dir) {
 
     const basePath = fullPath.replace(ext, '');
 
+    const avifPath = `${basePath}.avif`;
+    const webpPath = `${basePath}.webp`;
+
+    if (fs.existsSync(avifPath) && fs.existsSync(webpPath)) {
+      console.log(`⏭ ${file} ya convertido`);
+      continue;
+    }
+
     await sharp(fullPath)
       .avif({ quality: 65 })
-      .toFile(`${basePath}.avif`);
+      .toFile(avifPath);
 
     await sharp(fullPath)
       .webp({ quality: 80 })
-      .toFile(`${basePath}.webp`);
+      .toFile(webpPath);
 
     console.log(`✔ ${file} → AVIF + WebP`);
-
-    // Elimina el original (opcional)
-    // fs.unlinkSync(fullPath);
   }
 }
 

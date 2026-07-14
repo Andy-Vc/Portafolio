@@ -83,15 +83,15 @@
       [class]="project.accent">
 
       <div #mediaScroll class="h-full w-full overflow-y-auto scrollbar-hide">
-        @if (project.media.length) {
         @if (project.media[activeMediaIndex()].type === 'video') {
-        <video class="w-full h-auto object-top" [src]="project.media[activeMediaIndex()].src" autoplay muted loop
-          playsinline controls></video>
+        <video (loadedmetadata)="onMediaLoad($event)"
+          [class]="fillsContainer() ? 'h-full w-full object-cover' : 'w-full h-auto object-top'"
+          [src]="project.media[activeMediaIndex()].src" autoplay muted loop playsinline controls></video>
         } @else {
-        <img [src]="project.media[activeMediaIndex()].src" [alt]="project.media[activeMediaIndex()].alt"
-          class="w-full h-auto object-top" />
-        }
-        }
+        <img (load)="onMediaLoad($event)" [src]="project.media[activeMediaIndex()].src"
+          [alt]="project.media[activeMediaIndex()].alt" [class]="fillsContainer()
+      ? 'w-full h-full object-fill'
+      : 'w-full h-auto object-top'" />}
       </div>
 
       @if (project.media.length) {

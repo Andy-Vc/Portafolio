@@ -15,6 +15,7 @@ export class ProjectsComponent {
   readonly projects = PROJECTS;
   readonly selectedProject = signal<ProjectItem | null>(null);
   readonly activeMediaIndex = signal(0);
+  readonly fillsContainer = signal(false);
 
   @ViewChild('mediaScroll') mediaScrollRef?: ElementRef<HTMLDivElement>;
 
@@ -25,6 +26,23 @@ export class ProjectsComponent {
     this.lockBodyScroll();
   }
 
+  onMediaLoad(event: Event): void {
+    const el = event.target as HTMLImageElement | HTMLVideoElement;
+    const container = this.mediaScrollRef?.nativeElement;
+
+    if (!container) return;
+
+    const mediaWidth =
+      el instanceof HTMLImageElement ? el.naturalWidth : el.videoWidth;
+
+    const mediaHeight =
+      el instanceof HTMLImageElement ? el.naturalHeight : el.videoHeight;
+
+    const mediaRatio = mediaWidth / mediaHeight;
+    const containerRatio = container.clientWidth / container.clientHeight;
+
+    this.fillsContainer.set(mediaRatio > containerRatio);
+  }
   closeProject(): void {
     this.selectedProject.set(null);
     this.unlockBodyScroll();
