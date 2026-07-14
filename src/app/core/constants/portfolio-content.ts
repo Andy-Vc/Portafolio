@@ -51,6 +51,7 @@ export interface ProjectItem {
   stack: string[];
   features: string[];
   media: MediaItem[];
+  platform: 'web' | 'mobile';
   github: string;
   accent: string;
 }
@@ -294,12 +295,15 @@ export const PROJECTS: ProjectItem[] = [
       'Vercel',
       'Spring Mail',
     ],
+    platform: 'web',
     features: [
-      'Roles diferenciados: superadmin, administrador de hotel y usuario final',
-      'Dashboard de reportes con gráficos de ocupación y reservas',
-      'Gestión de hoteles, establecimientos y habitaciones desde el panel admin',
+      'Roles diferenciados: superadmin, administrador de hotel o establecimiento, recepcionista de hotel y usuario final',
+      'Dashboard de reportes con gráficos de ocupación, ingresos y reservas por periodo',
+      'Gestión de hoteles, establecimientos y habitaciones desde el panel admin, con disponibilidad en tiempo real',
+      'Búsqueda y filtrado de hoteles por ubicación, fechas y precio para el usuario final',
+      'Flujo completo de reserva: selección de habitación, confirmación y pago',
       'Autenticación con verificación por código de 6 dígitos al correo',
-      'Notificaciones y comprobantes automáticos por correo',
+      'Notificaciones y comprobantes automáticos por correo tras cada reserva',
       'Backend en Render y frontend en Vercel, en producción',
     ],
     media: [
@@ -320,8 +324,10 @@ export const PROJECTS: ProjectItem[] = [
       {
         type: 'image',
         src: 'assets/projects/aventuria/Detalle Establecimiento - Aventuria.avif',
-        webpSrc: 'assets/projects/aventuria/Detalle Establecimiento - Aventuria.webp',
-        pngSrc: 'assets/projects/aventuria/Detalle Establecimiento - Aventuria.png',
+        webpSrc:
+          'assets/projects/aventuria/Detalle Establecimiento - Aventuria.webp',
+        pngSrc:
+          'assets/projects/aventuria/Detalle Establecimiento - Aventuria.png',
         alt: 'Detalle del Establecimiento',
       },
       {
@@ -334,21 +340,26 @@ export const PROJECTS: ProjectItem[] = [
       {
         type: 'image',
         src: 'assets/projects/aventuria/SuperAdmin Dashboard - Aventuria.avif',
-        webpSrc: 'assets/projects/aventuria/SuperAdmin Dashboard - Aventuria.webp',
-        pngSrc: 'assets/projects/aventuria/SuperAdmin Dashboard - Aventuria.png',
+        webpSrc:
+          'assets/projects/aventuria/SuperAdmin Dashboard - Aventuria.webp',
+        pngSrc:
+          'assets/projects/aventuria/SuperAdmin Dashboard - Aventuria.png',
         alt: 'Dashboard del Super Admin',
       },
       {
         type: 'image',
         src: 'assets/projects/aventuria/AdminHotel Habitaciones - Aventuria.avif',
-        webpSrc: 'assets/projects/aventuria/AdminHotel Habitaciones - Aventuria.webp',
-        pngSrc: 'assets/projects/aventuria/AdminHotel Habitaciones - Aventuria.png',
+        webpSrc:
+          'assets/projects/aventuria/AdminHotel Habitaciones - Aventuria.webp',
+        pngSrc:
+          'assets/projects/aventuria/AdminHotel Habitaciones - Aventuria.png',
         alt: 'Habitaciones del Admin Hotel',
       },
       {
         type: 'image',
         src: 'assets/projects/aventuria/AdminHotel Reportes - Aventuria.avif',
-        webpSrc: 'assets/projects/aventuria/AdminHotel Reportes - Aventuria.webp',
+        webpSrc:
+          'assets/projects/aventuria/AdminHotel Reportes - Aventuria.webp',
         pngSrc: 'assets/projects/aventuria/AdminHotel Reportes - Aventuria.png',
         alt: 'Reportes del Admin Hotel',
       },
@@ -368,12 +379,16 @@ export const PROJECTS: ProjectItem[] = [
       'RabbitMQ',
       'Redis',
       'Docker',
+      'Cloudinary',
     ],
+    platform: 'web',
     features: [
+      'Gestión de reservas de mesas y pedidos en línea desde el panel del cliente',
+      'Módulo de órdenes para meseros con seguimiento en tiempo real',
       'Chat en tiempo real entre clientes y recepcionistas con WebSockets',
-      'Mensajería asíncrona entre microservicios con RabbitMQ',
-      'Caché con Redis para reducir carga en base de datos',
-      'Proyecto contenerizado completo con Docker',
+      'Comunicación asíncrona entre microservicios mediante RabbitMQ',
+      'Caché con Redis para optimizar tiempos de respuesta y reducir carga en base de datos',
+      'Arquitectura completamente contenerizada con Docker, lista para despliegue',
     ],
     media: [
       {
@@ -427,18 +442,73 @@ export const PROJECTS: ProjectItem[] = [
     period: 'Noviembre 2025 — Diciembre 2025',
     description:
       'Aplicación Android para reportar incidentes ambientales, con clasificación automática de imágenes mediante Machine Learning.',
-    stack: ['Android (Kotlin)', 'Spring Boot', 'Python', 'Machine Learning'],
+    stack: [
+      'Android (Kotlin)',
+      'Spring Boot',
+      'Python',
+      'Machine Learning',
+      'PostgreSQL',
+      'Cloudinary',
+    ],
+    platform: 'mobile',
     features: [
-      'Escaneo y clasificación automática de incidentes por imagen',
-      'Backend RESTful para gestión de reportes y usuarios',
-      'Modelo de ML en Python integrado al flujo de la app',
-      'Coordinación multidisciplinaria bajo Scrum y Trello',
+      'Reporte de incidentes ambientales con clasificación automática de imágenes vía Machine Learning',
+      'Asistente conversacional (chat IA) para guiar al usuario en el reporte',
+      'Sistema de recompensas: catálogo y canje de cupones por reportes validados',
+      'Backend RESTful en Spring Boot para gestión de reportes, usuarios y cupones',
+      'Modelo de clasificación en Python integrado al flujo de la app vía API',
     ],
     media: [
       {
         type: 'image',
-        src: 'assets/images/projects/greenguardian.jpg',
-        alt: 'Pantalla de clasificación de incidentes en GreenGuardian',
+        src: 'assets/projects/greenguard/Inicio - GreenGuard.avif',
+        webpSrc: 'assets/projects/greenguard/Inicio - GreenGuard.webp',
+        pngSrc: 'assets/projects/greenguard/Inicio - GreenGuard.png',
+        alt: 'Pantalla de Inicio',
+      },
+      {
+        type: 'image',
+        src: 'assets/projects/greenguard/Chat - GreenGuard.avif',
+        webpSrc: 'assets/projects/greenguard/Chat - GreenGuard.webp',
+        pngSrc: 'assets/projects/greenguard/Chat - GreenGuard.png',
+        alt: 'Chat IA de GreenGuard',
+      },
+      {
+        type: 'image',
+        src: 'assets/projects/greenguard/Reportes - GreenGuard.avif',
+        webpSrc: 'assets/projects/greenguard/Reportes - GreenGuard.webp',
+        pngSrc: 'assets/projects/greenguard/Reportes - GreenGuard.png',
+        alt: 'Pantalla de Reportes',
+      },
+      {
+        type: 'image',
+        src: 'assets/projects/greenguard/Clasificación IA - GreenGuard.avif',
+        webpSrc:
+          'assets/projects/greenguard/Clasificación IA - GreenGuard.webp',
+        pngSrc: 'assets/projects/greenguard/Clasificación IA - GreenGuard.png',
+        alt: 'Clasificación Automática de Imágenes',
+      },
+      {
+        type: 'image',
+        src: 'assets/projects/greenguard/Resultados IA - GreenGuard.avif',
+        webpSrc: 'assets/projects/greenguard/Resultados IA - GreenGuard.webp',
+        pngSrc: 'assets/projects/greenguard/Resultados IA - GreenGuard.png',
+        alt: 'Resultados de la Clasificación',
+      },
+      {
+        type: 'image',
+        src: 'assets/projects/greenguard/Catalogo Cupones - GreenGuard.avif',
+        webpSrc:
+          'assets/projects/greenguard/Catalogo Cupones - GreenGuard.webp',
+        pngSrc: 'assets/projects/greenguard/Catalogo Cupones - GreenGuard.png',
+        alt: 'Catálogo de Cupones',
+      },
+      {
+        type: 'image',
+        src: 'assets/projects/greenguard/Canjear Cupon - GreenGuard.avif',
+        webpSrc: 'assets/projects/greenguard/Canjear Cupon - GreenGuard.webp',
+        pngSrc: 'assets/projects/greenguard/Canjear Cupon - GreenGuard.png',
+        alt: 'Canjear Cupón',
       },
     ],
     github: 'https://github.com/your-username/greenguardian',

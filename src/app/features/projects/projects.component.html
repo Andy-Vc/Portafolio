@@ -82,17 +82,25 @@
     <div class="relative h-64 border-b border-surface-border lg:h-full lg:border-b-0 lg:border-r overflow-hidden"
       [class]="project.accent">
 
-      <div #mediaScroll class="h-full w-full overflow-y-auto scrollbar-hide">
-        @if (project.media[activeMediaIndex()].type === 'video') {
-        <video (loadedmetadata)="onMediaLoad($event)"
-          [class]="fillsContainer() ? 'h-full w-full object-cover' : 'w-full h-auto object-top'"
-          [src]="project.media[activeMediaIndex()].src" autoplay muted loop playsinline controls></video>
-        } @else {
-        <img (load)="onMediaLoad($event)" [src]="project.media[activeMediaIndex()].src"
-          [alt]="project.media[activeMediaIndex()].alt" [class]="fillsContainer()
-      ? 'w-full h-full object-fill'
-      : 'w-full h-auto object-top'" />}
-      </div>
+     <div #mediaScroll
+       [class]="project.platform === 'mobile'
+         ? 'flex h-full w-full items-center justify-center overflow-y-auto scrollbar-hide'
+         : 'h-full w-full overflow-y-auto scrollbar-hide'">
+    @if (project.media[activeMediaIndex()].type === 'video') {
+    <video (loadedmetadata)="onMediaLoad($event)"
+           [class]="project.platform === 'mobile'
+             ? 'h-full max-w-[280px] object-contain mx-auto'
+             : (fillsContainer() ? 'h-full w-full object-cover' : 'w-full h-auto object-top')"
+           [src]="project.media[activeMediaIndex()].src" autoplay muted loop playsinline controls></video>
+    } @else {
+    <img (load)="onMediaLoad($event)"
+         [src]="project.media[activeMediaIndex()].src"
+         [alt]="project.media[activeMediaIndex()].alt"
+         [class]="project.platform === 'mobile'
+           ? 'h-full max-w-[280px] object-contain mx-auto'
+           : (fillsContainer() ? 'w-full h-full object-fill' : 'w-full h-auto object-top')" />
+    }
+  </div>
 
       @if (project.media.length) {
       <div
