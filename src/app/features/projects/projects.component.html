@@ -15,7 +15,7 @@
     <article
       class="stagger-item overflow-hidden rounded-[1.5rem] border border-surface-border bg-surface-card transition duration-300 hover:-translate-y-0.5 hover:border-brand/30">
       @if (project.media.length) {
-      <div class="relative h-44 overflow-y-auto scrollbar-hide border-b border-surface-border" [class]="project.accent">
+      <div class="relative h-44 overflow-hidden scrollbar-hide border-b border-surface-border" [class]="project.accent">
         @if (project.media[0].type === 'video') {
         <video class="h-full w-full object-cover" [src]="project.media[0].src" autoplay muted loop playsinline></video>
         } @else {
@@ -68,23 +68,25 @@
 <dialog #projectDialog (close)="closeProject()"
   class="m-auto h-[85vh] w-full max-w-7xl overflow-hidden rounded-[1.75rem] border border-surface-border bg-surface-card p-0 backdrop:bg-black/60 backdrop:backdrop-blur-sm">
   @if (selectedProject(); as project) {
-  <div class="grid h-full grid-rows-[auto_1fr] lg:grid-cols-[1.6fr_1fr] lg:grid-rows-1">
-    <div class="relative h-64 border-b border-surface-border lg:h-full lg:border-b-0 lg:border-r overflow-hidden"
+  <div class="grid h-full grid-rows-[3fr_2fr] lg:grid-cols-[1.6fr_1fr] lg:grid-rows-1">
+    <div class="relative border-b border-surface-border lg:h-full lg:border-b-0 lg:border-r overflow-hidden"
       [class]="project.accent">
 
       <div #mediaScroll [class]="project.platform === 'mobile'
-         ? 'flex h-full w-full items-center justify-center overflow-y-auto scrollbar-hide'
-         : 'h-full w-full overflow-y-auto scrollbar-hide'">
+     ? 'h-full w-full overflow-y-auto scrollbar-hide lg:flex lg:items-center lg:justify-center'
+     : 'h-full w-full overflow-y-auto scrollbar-hide'">
+
         @if (project.media[activeMediaIndex()].type === 'video') {
         <video (loadedmetadata)="onMediaLoad($event)" [class]="project.platform === 'mobile'
-             ? 'h-full max-h-[90%] max-w-[320px] w-auto object-contain mx-auto rounded-[1.75rem] border-[5px] border-black/90 shadow-xl'
-             : (fillsContainer() ? 'h-full w-full object-cover' : 'w-full h-auto object-top')"
+      ? ((fillsContainer() ? 'h-full w-full object-cover' : 'w-full h-auto object-top') + ' lg:h-full lg:max-h-[90%] lg:max-w-[320px] lg:w-auto lg:object-contain lg:mx-auto lg:rounded-[1.75rem] lg:border-[5px] lg:border-black/90 lg:shadow-xl')
+      : (fillsContainer() ? 'h-full w-full object-cover' : 'w-full h-auto object-top')"
           [src]="project.media[activeMediaIndex()].src" autoplay muted loop playsinline controls></video>
         } @else {
         <img (load)="onMediaLoad($event)" [src]="project.media[activeMediaIndex()].src"
-          [alt]="project.media[activeMediaIndex()].alt" [class]="project.platform === 'mobile'
-           ? 'h-full max-h-[90%] max-w-[320px] w-auto object-contain mx-auto rounded-[1.75rem] border-[5px] border-black/90 shadow-xl'
-           : (fillsContainer() ? 'w-full h-full object-fill' : 'w-full h-auto object-top')" />
+          [alt]="project.media[activeMediaIndex()].alt" loading="eager" decoding="async"
+          [class]="project.platform === 'mobile'
+          ? ((fillsContainer() ? 'w-full h-full object-fill' : 'w-full h-auto object-top') + ' transition-opacity duration-150 lg:h-full lg:max-h-[90%] lg:max-w-[320px] lg:w-auto lg:object-contain lg:mx-auto lg:rounded-[1.75rem] lg:border-[5px] lg:border-black/90 lg:shadow-xl')
+          : (fillsContainer() ? 'w-full h-full object-fill' : 'w-full h-auto object-top') + ' transition-opacity duration-150'" />
         }
       </div>
 

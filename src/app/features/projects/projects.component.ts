@@ -24,6 +24,12 @@ export class ProjectsComponent {
     this.activeMediaIndex.set(0);
     dialog.showModal();
     this.lockBodyScroll();
+    project.media.forEach((item) => {
+      if (item.type !== 'video') {
+        const img = new Image();
+        img.src = item.src;
+      }
+    });
   }
 
   onMediaLoad(event: Event): void {
