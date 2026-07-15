@@ -95,7 +95,7 @@ export const NAV_LINKS: NavLink[] = [
 ];
 
 export const SOCIAL_LINKS: SocialLink[] = [
-  { label: 'Correo', href: 'andy.v.centeno@gmail.com', icon: 'email' },
+  { label: 'Correo', href: 'mailto:andy.v.centeno@gmail.com', icon: 'email' },
   { label: 'GitHub', href: 'https://github.com/Andy-Vc', icon: 'github' },
   {
     label: 'LinkedIn',
