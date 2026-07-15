@@ -10,7 +10,7 @@
     </p>
   </div>
 
-  <div class="grid gap-4 xl:grid-cols-2">
+  <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
     @for (group of groups; track group.title) {
     <article
       class="stagger-item rounded-[1.5rem] border border-surface-border bg-surface-card p-6 transition-colors duration-300">
@@ -83,23 +83,23 @@
         </span>
       </div>
 
-      <div class="mt-5 grid gap-2.5 sm:grid-cols-2">
+      <div class="mt-5 flex flex-wrap gap-2">
         @for (item of group.items; track item.name) {
-        <article
-          class="flex items-center gap-3 rounded-xl border border-surface-border bg-surface-secondary px-3.5 py-2.5 transition-all duration-200 hover:border-foreground-muted/30 hover:bg-surface-card hover:-translate-y-0.5">
-          <div class="flex h-6 w-6 shrink-0 items-center justify-center">
+        <div
+          class="flex items-center gap-2 rounded-full border border-surface-border bg-surface-secondary px-3 py-1.5 transition-all duration-200 hover:border-foreground-muted/30 hover:bg-surface-card">
+          <div class="flex h-4 w-4 shrink-0 items-center justify-center">
             @if (item.image) {
             <picture class="flex h-full w-full items-center justify-center">
               <source [srcset]="item.image + '.avif'" type="image/avif" />
               <source [srcset]="item.image + '.webp'" type="image/webp" />
-              <img [src]="item.image + '.png'" [alt]="item.name" class="h-5 w-6 object-contain" />
+              <img [src]="item.image + '.png'" [alt]="item.name" class="h-3.5 w-3.5 object-contain" />
             </picture>
             } @else {
-            <app-tech-icon [key]="item.iconKey || ''" [fallback]="item.icon" class="h-5 w-5"></app-tech-icon>
+            <app-tech-icon [key]="item.iconKey || ''" [fallback]="item.icon" class="h-3.5 w-3.5"></app-tech-icon>
             }
           </div>
-          <p class="truncate text-sm font-medium text-foreground-primary">{{ item.name }}</p>
-        </article>
+          <p class="whitespace-nowrap text-xs font-medium text-foreground-primary">{{ item.name }}</p>
+        </div>
         }
       </div>
     </article>

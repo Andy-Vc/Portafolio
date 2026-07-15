@@ -39,7 +39,12 @@ type TechIconKey =
   | 'figma'
   | 'swagger'
   | 'supabase'
-  | 'bruno';
+  | 'bruno'
+  | 'neon'
+  | 'render'
+  | 'vercel'
+  | 'firebase'
+  | 'netlify';
 
 const TECH_ICON_MAP: Partial<Record<TechIconKey, SimpleIcon>> = {
   angular: SimpleIcons.siAngular,
@@ -79,25 +84,31 @@ const TECH_ICON_MAP: Partial<Record<TechIconKey, SimpleIcon>> = {
   figma: SimpleIcons.siFigma,
   swagger: SimpleIcons.siSwagger,
   bruno: SimpleIcons.siBruno,
+  neon: SimpleIcons.siNeon,
+  render: SimpleIcons.siRender,
+  vercel: SimpleIcons.siVercel,
+  netlify: SimpleIcons.siNetlify,
+  firebase: SimpleIcons.siFirebase,
 };
 @Component({
   selector: 'app-tech-icon',
   standalone: true,
+  host: {
+    class: 'flex shrink-0 items-center justify-center',
+  },
   template: `
     @if (icon(); as resolvedIcon) {
-      <span class="flex h-6 w-6 shrink-0 items-center justify-center">
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          class="h-4 w-4 text-foreground-secondary"
-          fill="currentColor"
-        >
-          <path [attr.d]="resolvedIcon.path"></path>
-        </svg>
-      </span>
+      <svg
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        class="h-full w-full text-foreground-secondary"
+        fill="currentColor"
+      >
+        <path [attr.d]="resolvedIcon.path"></path>
+      </svg>
     } @else {
       <span
-        class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-surface-border bg-surface-card text-[10px] font-semibold text-brand-light"
+        class="flex h-full w-full items-center justify-center rounded-full border border-surface-border bg-surface-card text-[8px] font-semibold text-brand-light"
       >
         {{ fallback }}
       </span>
