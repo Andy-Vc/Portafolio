@@ -14,6 +14,7 @@ export interface StackItem {
   category: string;
   icon: string;
   iconKey?: string;
+  image?: string;
 }
 
 export interface StackGroup {
@@ -52,7 +53,6 @@ export interface ProjectItem {
   features: string[];
   media: MediaItem[];
   platform: 'web' | 'mobile';
-  github: string;
   accent: string;
 }
 
@@ -145,6 +145,12 @@ export const STACK_GROUPS: StackGroup[] = [
         iconKey: 'springsecurity',
       },
       {
+        name: 'C#',
+        category: 'Backend',
+        icon: 'CS',
+        image: 'assets/icons/csharp',
+      },
+      {
         name: '.NET Core',
         category: 'Backend',
         icon: 'NET',
@@ -219,6 +225,8 @@ export const STACK_GROUPS: StackGroup[] = [
         iconKey: 'mongodb',
       },
       { name: 'Redis', category: 'Databases', icon: 'RD', iconKey: 'redis' },
+      { name: 'SupaBase', category: 'Databases', icon: 'SB', iconKey: 'supabase' },
+      { name: 'Microsoft SQL Server', category: 'Databases', icon: 'MS', image: 'assets/icons/mssql'},
     ],
   },
   {
@@ -276,6 +284,7 @@ export const STACK_GROUPS: StackGroup[] = [
       },
       { name: 'Figma', category: 'Tools', icon: 'FG', iconKey: 'figma' },
       { name: 'Swagger', category: 'Tools', icon: 'SW', iconKey: 'swagger' },
+      { name: 'VS Code', category: 'Tools', icon: 'VS', image: 'assets/icons/vs-code' }
     ],
   },
 ];
@@ -364,7 +373,6 @@ export const PROJECTS: ProjectItem[] = [
         alt: 'Reportes del Admin Hotel',
       },
     ],
-    github: 'https://github.com/your-username/aventuria',
     accent: 'bg-[#121214]',
   },
   {
@@ -434,7 +442,6 @@ export const PROJECTS: ProjectItem[] = [
         alt: 'Contenerización con Docker',
       },
     ],
-    github: 'https://github.com/your-username/korofoods',
     accent: 'bg-[#141416]',
   },
   {
@@ -511,7 +518,6 @@ export const PROJECTS: ProjectItem[] = [
         alt: 'Canjear Cupón',
       },
     ],
-    github: 'https://github.com/your-username/greenguardian',
     accent: 'bg-[#121214]',
   },
 ];

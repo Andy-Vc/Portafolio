@@ -14,7 +14,6 @@ type TechIconKey =
   | 'openjdk'
   | 'springboot'
   | 'springsecurity'
-  | 'csharp'
   | 'dotnet'
   | 'nodedotjs'
   | 'fastapi'
@@ -39,6 +38,7 @@ type TechIconKey =
   | 'intellijidea'
   | 'figma'
   | 'swagger'
+  | 'supabase'
   | 'bruno';
 
 const TECH_ICON_MAP: Partial<Record<TechIconKey, SimpleIcon>> = {
@@ -62,7 +62,7 @@ const TECH_ICON_MAP: Partial<Record<TechIconKey, SimpleIcon>> = {
   redis: SimpleIcons.siRedis,
   docker: SimpleIcons.siDocker,
   git: SimpleIcons.siGit,
-  csharp: SimpleIcons.siSharp,
+  supabase: SimpleIcons.siSupabase,
   dotnet: SimpleIcons.siDotnet,
   github: SimpleIcons.siGithub,
   linux: SimpleIcons.siLinux,
@@ -80,23 +80,24 @@ const TECH_ICON_MAP: Partial<Record<TechIconKey, SimpleIcon>> = {
   swagger: SimpleIcons.siSwagger,
   bruno: SimpleIcons.siBruno,
 };
-
 @Component({
   selector: 'app-tech-icon',
   standalone: true,
   template: `
     @if (icon(); as resolvedIcon) {
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 24 24"
-        class="h-4 w-4 shrink-0 text-foreground-secondary"
-        fill="currentColor"
-      >
-        <path [attr.d]="resolvedIcon.path"></path>
-      </svg>
+      <span class="flex h-6 w-6 shrink-0 items-center justify-center">
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          class="h-4 w-4 text-foreground-secondary"
+          fill="currentColor"
+        >
+          <path [attr.d]="resolvedIcon.path"></path>
+        </svg>
+      </span>
     } @else {
       <span
-        class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full border border-surface-border bg-surface-card text-[10px] font-semibold text-brand-light"
+        class="flex h-6 w-6 shrink-0 items-center justify-center rounded-full border border-surface-border bg-surface-card text-[10px] font-semibold text-brand-light"
       >
         {{ fallback }}
       </span>

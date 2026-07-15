@@ -26,6 +26,11 @@ a {
 	text-decoration: none;
 }
 
+img, picture {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
 button,
 input,
 textarea,
