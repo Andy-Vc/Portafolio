@@ -131,7 +131,12 @@ export const STACK_GROUPS: StackGroup[] = [
     description:
       'Tecnologías que uso para construir APIs, seguridad y lógica de negocio.',
     items: [
-      { name: 'Java 21', category: 'Backend', icon: 'J', image: 'assets/icons/java', },
+      {
+        name: 'Java 21',
+        category: 'Backend',
+        icon: 'J',
+        image: 'assets/icons/java',
+      },
       {
         name: 'Spring Boot',
         category: 'Backend',
@@ -225,10 +230,25 @@ export const STACK_GROUPS: StackGroup[] = [
         iconKey: 'mongodb',
       },
       { name: 'Redis', category: 'Databases', icon: 'RD', iconKey: 'redis' },
-      { name: 'SupaBase', category: 'Databases', icon: 'SB', iconKey: 'supabase' },
+      {
+        name: 'SupaBase',
+        category: 'Databases',
+        icon: 'SB',
+        iconKey: 'supabase',
+      },
       { name: 'Neon', category: 'Databases', icon: 'NE', iconKey: 'neon' },
-      { name: 'Firebase', category: 'Databases', icon: 'FB', iconKey: 'firebase' },
-      { name: 'Microsoft SQL Server', category: 'Databases', icon: 'MS', image: 'assets/icons/mssql'},
+      {
+        name: 'Firebase',
+        category: 'Databases',
+        icon: 'FB',
+        iconKey: 'firebase',
+      },
+      {
+        name: 'Microsoft SQL Server',
+        category: 'Databases',
+        icon: 'MS',
+        image: 'assets/icons/mssql',
+      },
     ],
   },
   {
@@ -254,7 +274,7 @@ export const STACK_GROUPS: StackGroup[] = [
       { name: 'RabbitMQ', category: 'DevOps', icon: 'RM', iconKey: 'rabbitmq' },
       { name: 'Render', category: 'Tools', icon: 'RE', iconKey: 'render' },
       { name: 'Vercel', category: 'Tools', icon: 'VE', iconKey: 'vercel' },
-      { name: 'Netlify', category: 'Tools', icon: 'NL', iconKey: 'netlify' }
+      { name: 'Netlify', category: 'Tools', icon: 'NL', iconKey: 'netlify' },
     ],
   },
   {
@@ -274,14 +294,24 @@ export const STACK_GROUPS: StackGroup[] = [
       'Software que uso para documentar, diseñar y validar el desarrollo.',
     items: [
       { name: 'Postman', category: 'Tools', icon: 'PM', iconKey: 'postman' },
-      { name: 'SoapUI', category: 'Tools', icon: 'SU', image: 'assets/icons/soap-ui' },
+      {
+        name: 'SoapUI',
+        category: 'Tools',
+        icon: 'SU',
+        image: 'assets/icons/soap-ui',
+      },
       {
         name: 'IntelliJ IDEA',
         category: 'Tools',
         icon: 'IJ',
         iconKey: 'intellijidea',
       },
-      { name: 'Spring Tool Suite', category: 'Tools', icon: 'STS', image: 'assets/icons/sts' },
+      {
+        name: 'Spring Tool Suite',
+        category: 'Tools',
+        icon: 'STS',
+        image: 'assets/icons/sts',
+      },
       { name: 'Cursor', category: 'Tools', icon: 'CU', iconKey: 'cursor' },
       {
         name: 'GitHub Copilot',
@@ -291,8 +321,18 @@ export const STACK_GROUPS: StackGroup[] = [
       },
       { name: 'Figma', category: 'Tools', icon: 'FG', iconKey: 'figma' },
       { name: 'Swagger', category: 'Tools', icon: 'SW', iconKey: 'swagger' },
-      { name: 'VS Code', category: 'Tools', icon: 'VS', image: 'assets/icons/vs-code' },
-      { name: 'Visual Studio', category: 'Tools', icon: 'VS', image: 'assets/icons/visual-studio' },
+      {
+        name: 'VS Code',
+        category: 'Tools',
+        icon: 'VS',
+        image: 'assets/icons/vs-code',
+      },
+      {
+        name: 'Visual Studio',
+        category: 'Tools',
+        icon: 'VS',
+        image: 'assets/icons/visual-studio',
+      },
     ],
   },
 ];
@@ -506,22 +546,28 @@ export const PROJECTS: ProjectItem[] = [
       {
         type: 'image',
         src: 'assets/projects/cafeaurora/Panel Recepcionista - CafeAurora.avif',
-        webpSrc: 'assets/projects/cafeaurora/Panel Recepcionista - CafeAurora.webp',
-        pngSrc: 'assets/projects/cafeaurora/Panel Recepcionista - CafeAurora.png',
+        webpSrc:
+          'assets/projects/cafeaurora/Panel Recepcionista - CafeAurora.webp',
+        pngSrc:
+          'assets/projects/cafeaurora/Panel Recepcionista - CafeAurora.png',
         alt: 'Panel de Recepcionista',
       },
       {
         type: 'image',
         src: 'assets/projects/cafeaurora/Autenticación Google - CafeAurora.avif',
-        webpSrc: 'assets/projects/cafeaurora/Autenticación Google - CafeAurora.webp',
-        pngSrc: 'assets/projects/cafeaurora/Autenticación Google - CafeAurora.png',
+        webpSrc:
+          'assets/projects/cafeaurora/Autenticación Google - CafeAurora.webp',
+        pngSrc:
+          'assets/projects/cafeaurora/Autenticación Google - CafeAurora.png',
         alt: 'Autenticación con Google',
       },
       {
         type: 'image',
         src: 'assets/projects/cafeaurora/Completando Autenticación - CafeAurora.avif',
-        webpSrc: 'assets/projects/cafeaurora/Completando Autenticación - CafeAurora.webp',
-        pngSrc: 'assets/projects/cafeaurora/Completando Autenticación - CafeAurora.png',
+        webpSrc:
+          'assets/projects/cafeaurora/Completando Autenticación - CafeAurora.webp',
+        pngSrc:
+          'assets/projects/cafeaurora/Completando Autenticación - CafeAurora.png',
         alt: 'Completando Autenticación',
       },
     ],
@@ -670,5 +716,12 @@ export const CERTIFICATIONS: CertificationItem[] = [
     date: '2026',
     category: 'Logro académico',
     credentialUrl: '/assets/documents/constancia-egresado.pdf',
+  },
+  {
+    title: 'RECONOCIMIENTO ACADÉMICO - MEJOR PROYECTO DEL CURSO',
+    issuer: 'Cibertec - 2024',
+    date: '2024',
+    category: 'Reconocimiento',
+    credentialUrl: '/assets/documents/constancia-feria.pdf',
   },
 ];
