@@ -5,7 +5,8 @@ import { RevealOnScrollDirective } from '../../shared/directives/reveal-on-scrol
 import { TechIconComponent } from '../../shared/components/tech-icon/tech-icon.component';
 
 const GROUP_ACCENT: Record<string, string> = {
-  Frontend: 'bg-violet-500/10 text-violet-300 ring-1 ring-inset ring-violet-500/20',
+  // Frontend: 'bg-violet-500/10 text-violet-300 ring-1 ring-inset ring-violet-500/20',
+  Frontend: 'bg-red-500/10 text-red-300 ring-1 ring-inset ring-red-500/20',
   Backend: 'bg-sky-500/10 text-sky-300 ring-1 ring-inset ring-sky-500/20',
   'Bases de datos': 'bg-emerald-500/10 text-emerald-300 ring-1 ring-inset ring-emerald-500/20',
   DevOps: 'bg-amber-500/10 text-amber-300 ring-1 ring-inset ring-amber-500/20',

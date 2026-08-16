@@ -25,7 +25,8 @@ export class CertificatesComponent {
       case 'DevOps':
         return `${base} border-cyan-400/20 bg-cyan-400/10 text-cyan-300`;
       case 'Cloud':
-        return `${base} border-violet-400/20 bg-violet-400/10 text-violet-300`;
+        // return `${base} border-violet-400/20 bg-violet-400/10 text-violet-300`;
+        return `${base} border-red-400/20 bg-red-400/10 text-red-300`;
       case 'Logro académico':
         return `${base} border-amber-400/20 bg-amber-400/10 text-amber-300`;
       default:

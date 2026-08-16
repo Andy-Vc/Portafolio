@@ -9,8 +9,9 @@
         <button type="button" appScrollToSection="inicio" class="group flex items-center gap-4 py-3 focus-ring"
             aria-label="Ir al inicio">
             <div
-                class="relative flex h-12 w-12 items-center justify-center rounded-2xl border border-surface-border bg-surface-card font-semibold tracking-[0.22em] text-brand transition-all duration-300 group-hover:scale-105 group-hover:border-brand/40">
-                AV
+                class="relative h-12 w-12 rounded-2xl border border-surface-border bg-surface-card text-brand transition-colors duration-300 group-hover:border-brand/40">
+                <span
+                    class="absolute inset-0 grid place-items-center text-center font-semibold leading-none tracking-[0.16em] pl-[0.16em]">AV</span>
                 <span
                     class="absolute -bottom-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full border-2 border-surface-secondary bg-emerald-400"></span>
             </div>
@@ -24,11 +25,11 @@
             @for (link of links; track link.href) {
             <button type="button" [appScrollToSection]="link.href.slice(1)" class="relative inline-flex items-center justify-center rounded-full px-6 py-2.5
                     text-sm font-medium
-                    transition-all duration-300 ease-out
+                    transition-colors duration-300 ease-in-out
                     focus-ring" [ngClass]="
                     activeSection() === link.href.slice(1)
                     ? 'bg-brand/10 text-brand'
-                    : 'text-foreground-secondary hover:bg-surface-secondary hover:text-foreground-primary'
+                    : 'text-foreground-secondary hover:bg-brand/10 hover:text-brand'
                 ">
                 <span class="absolute left-4 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-brand
            transition-all duration-300 ease-out" [class.opacity-0]="activeSection() !== link.href.slice(1)"
@@ -57,11 +58,11 @@
             <nav class="grid gap-2.5">
                 @for (link of links; track link.href) {
                 <button type="button" [appScrollToSection]="link.href.slice(1)"
-                    class="relative rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-300 focus-ring"
+                    class="relative rounded-full px-5 py-2.5 text-sm font-medium transition-colors duration-300 ease-in-out focus-ring"
                     [ngClass]="
                         activeSection() === link.href.slice(1)
                         ? 'bg-brand/10 text-brand'
-                        : 'text-foreground-secondary hover:bg-surface-secondary hover:text-foreground-primary'
+                        : 'text-foreground-secondary hover:bg-brand/10 hover:text-brand'
                     ">
                     <span
                         class="absolute left-3 top-1/2 h-1.5 w-1.5 -translate-y-1/2 rounded-full bg-brand transition-all duration-300"
