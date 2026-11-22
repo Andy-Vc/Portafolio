@@ -421,7 +421,7 @@ export const PROJECTS: ProjectItem[] = [
         alt: 'Reportes del Admin Hotel',
       },
     ],
-    accent: 'bg-[#121214]',
+    accent: 'bg-surface-viewer',
   },
   {
     title: "KoroFood's",
@@ -490,7 +490,7 @@ export const PROJECTS: ProjectItem[] = [
         alt: 'Contenerización con Docker',
       },
     ],
-    accent: 'bg-[#141416]',
+    accent: 'bg-surface-viewer',
   },
   {
     title: 'CafeAurora',
@@ -571,7 +571,7 @@ export const PROJECTS: ProjectItem[] = [
         alt: 'Completando Autenticación',
       },
     ],
-    accent: 'bg-[#141416]',
+    accent: 'bg-surface-viewer',
   },
   {
     title: 'GreenGuardian',
@@ -647,7 +647,7 @@ export const PROJECTS: ProjectItem[] = [
         alt: 'Canjear Cupón',
       },
     ],
-    accent: 'bg-[#121214]',
+    accent: 'bg-surface-viewer',
   },
 ];
 

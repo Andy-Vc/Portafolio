@@ -5,56 +5,76 @@
   (appRevealOnScroll)="visible.set(true)"
   [@staggerReveal]="visible() ? 'visible' : 'hidden'"
 >
-  <div class="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-    <div>
-      <p class="text-sm font-medium uppercase tracking-[0.45em] text-foreground-muted">Experiencia</p>
-      <h2 class="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Mi primera práctica profesional.</h2>
-    </div>
-    <p class="max-w-2xl text-sm leading-7 text-foreground-secondary">
-      Un resumen directo de lo que hice, sin adornos visuales.
+  <div class="grid gap-12 border-t border-surface-border pt-8 lg:grid-cols-[10rem_1fr] lg:gap-8 lg:pt-10">
+    <p class="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-brand">
+      Experiencia
     </p>
-  </div>
 
-  <div class="grid gap-6">
+    <div>
+      <div class="max-w-3xl">
+        <h2 class="text-balance text-4xl font-semibold leading-[1.02] tracking-[-0.04em] text-foreground-primary sm:text-5xl">
+          Mi primera práctica profesional.
+        </h2>
+      </div>
+
+      <div class="mt-12 border-t border-surface-border">
     @for (entry of experience; track entry.company) {
-      <article class="stagger-item rounded-[1.5rem] border border-surface-border bg-surface-card p-6 lg:p-8">
-        <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-          <div>
-            <p class="text-xl font-semibold text-foreground-primary">{{ entry.role }}</p>
-            <p class="mt-1 text-sm text-foreground-muted">{{ entry.company }}</p>
-          </div>
-          <span class="inline-flex w-fit items-center rounded-full border border-surface-border bg-surface-secondary px-3.5 py-1.5 text-xs font-medium text-brand-light">
+      <article class="stagger-item grid gap-8 border-b border-surface-border py-8 sm:py-10 lg:grid-cols-[18rem_1fr] lg:gap-12 lg:py-12">
+        <div>
+          <p class="text-xl font-semibold leading-tight text-foreground-primary sm:text-2xl">
+            {{ entry.role }}
+          </p>
+          <p class="mt-3 text-sm font-medium text-foreground-secondary">
+            {{ entry.company }}
+          </p>
+          <p class="mt-6 text-[0.68rem] font-semibold uppercase leading-5 tracking-[0.18em] text-foreground-muted">
             {{ entry.period }}
-          </span>
+          </p>
         </div>
 
-        <div
-          class="mt-6 grid gap-6"
-          [ngClass]="entry.projects.length > 1 ? 'lg:grid-cols-' + entry.projects.length : ''"
-        >
+        <div class="border-t border-surface-border lg:border-l lg:border-t-0 lg:pl-12">
           @for (project of entry.projects; track project.title; let i = $index) {
-            <div [class.lg:pl-6]="i > 0" [class.lg:border-l]="i > 0" class="border-surface-border">
-              <p class="text-sm font-medium text-foreground-primary">{{ project.title }}</p>
-              <p class="mt-1 text-xs text-foreground-muted">{{ project.period }}</p>
+            <div
+              class="grid gap-5 py-6 first:pt-6 lg:grid-cols-[10rem_1fr]"
+              [class.border-t]="i > 0"
+              [class.border-surface-border]="i > 0"
+            >
+              <div>
+                <p class="text-[0.68rem] font-medium tabular-nums text-foreground-muted">
+                  {{ (i + 1).toString().padStart(2, '0') }}
+                </p>
+                <p class="mt-3 text-xs font-medium leading-5 text-foreground-muted">
+                  {{ project.period }}
+                </p>
+              </div>
 
-              <ul class="mt-4 grid gap-2.5 text-sm leading-6 text-foreground-secondary">
+              <div>
+                <h3 class="text-lg font-semibold leading-tight text-foreground-primary sm:text-xl">
+                  {{ project.title }}
+                </h3>
+
+                <ul class="mt-5 grid gap-3">
                 @for (achievement of project.achievements; track achievement) {
-                  <li class="flex gap-3">
-                    <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-light"></span>
+                  <li class="grid grid-cols-[1rem_1fr] gap-3 text-sm leading-7 text-foreground-secondary">
+                    <span class="mt-[0.72rem] h-px w-3 bg-brand"></span>
                     <span>{{ achievement }}</span>
                   </li>
                 }
-              </ul>
+                </ul>
 
-              @if (project.technologies?.length) {
-                <p class="mt-4 text-xs leading-5 text-foreground-muted">
-                  Stack: {{ stackLabel(project) }}
-                </p>
-              }
+                @if (project.technologies?.length) {
+                  <p class="mt-5 text-xs leading-6 text-foreground-muted">
+                    <span class="font-semibold uppercase tracking-[0.16em] text-foreground-secondary">Stack</span>
+                    <span class="ml-3">{{ stackLabel(project) }}</span>
+                  </p>
+                }
+              </div>
             </div>
           }
         </div>
       </article>
     }
+      </div>
+    </div>
   </div>
 </section>

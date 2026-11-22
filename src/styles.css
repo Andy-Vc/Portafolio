@@ -6,15 +6,109 @@ html {
 	scroll-behavior: smooth;
 }
 
+html,
+body {
+	border: 0;
+	outline: 0;
+}
+
+app-root {
+	display: block;
+}
+
+section[id] {
+	scroll-margin-top: 5rem;
+}
+
+@media (min-width: 640px) {
+	section[id] {
+		scroll-margin-top: 6rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+
+	*,
+	*::before,
+	*::after {
+		transition-duration: 0.01ms !important;
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+	}
+}
+
+.mobile-menu-panel {
+    transform: translate3d(100%, 0, 0);
+    transition: transform 450ms cubic-bezier(0.22, 1, 0.36, 1) !important;
+    will-change: transform;
+    visibility: visible;
+}
+
+.mobile-menu-panel.is-open {
+    transform: translate3d(0, 0, 0);
+}
+
+.mobile-menu-backdrop {
+    opacity: 0;
+    backdrop-filter: blur(0);
+    transition:
+        opacity 350ms ease,
+        backdrop-filter 350ms ease !important;
+    will-change: opacity, backdrop-filter;
+}
+
+.mobile-menu-backdrop.is-open {
+    opacity: 1;
+    backdrop-filter: blur(3px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .mobile-menu-panel,
+    .mobile-menu-backdrop {
+        transition: none !important;
+    }
+}
+
 body {
 	margin: 0;
 	min-height: 100vh;
-	background: #09090b;
-	color: #f5f5f7;
+	background: var(--color-surface);
+	color: var(--color-foreground-primary);
 	font-family: 'Inter', sans-serif;
 	text-rendering: optimizeLegibility;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	transition: background-color 300ms ease, color 300ms ease;
+}
+
+main,
+header,
+footer,
+section,
+article,
+nav,
+dialog,
+button,
+input,
+textarea,
+[class*="bg-"],
+[class*="border-"],
+[class*="text-"] {
+	transition-property: background-color, border-color, color, fill, stroke;
+	transition-duration: 300ms;
+	transition-timing-function: ease;
+}
+
+.project-dialog {
+	transition: background-color 300ms ease, border-color 300ms ease, color 300ms ease;
+}
+
+.project-dialog::backdrop {
+	background: var(--color-backdrop);
+	backdrop-filter: blur(3px);
 }
 
 * {
@@ -39,7 +133,6 @@ select {
 }
 
 ::selection {
-	/* background: rgba(124, 58, 237, 0.35); */
-	background: rgba(220, 38, 38, 0.35);
-	color: #f5f5f7;
+	background: var(--color-brand-glow);
+	color: var(--color-foreground-primary);
 }

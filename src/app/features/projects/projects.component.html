@@ -1,130 +1,184 @@
-<section id="proyectos" class="section-shell" appRevealOnScroll (appRevealOnScroll)="visible.set(true)"
-  [@staggerReveal]="visible() ? 'visible' : 'hidden'">
-  <div class="mb-10 flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
-    <div>
-      <p class="text-sm font-medium uppercase tracking-[0.45em] text-foreground-muted">Proyectos</p>
-      <h2 class="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">Proyectos técnicos con contexto real.</h2>
-    </div>
-    <p class="max-w-2xl text-sm leading-7 text-foreground-secondary">
-      Un vistazo rápido de cada uno — el detalle completo está a un clic.
+<section
+  id="proyectos"
+  class="section-shell"
+  appRevealOnScroll
+  (appRevealOnScroll)="visible.set(true)"
+  [@staggerReveal]="visible() ? 'visible' : 'hidden'"
+>
+  <div class="grid gap-12 border-t border-surface-border pt-8 lg:grid-cols-[10rem_1fr] lg:gap-8 lg:pt-10">
+    <p class="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-brand">
+      Proyectos
     </p>
-  </div>
 
-  <div class="grid gap-5 xl:grid-cols-3">
-    @for (project of projects; track project.title) {
-    <article
-      class="stagger-item overflow-hidden rounded-[1.5rem] border border-surface-border bg-surface-card transition duration-300 hover:-translate-y-0.5 hover:border-brand/30">
-      @if (project.media.length) {
-      <div class="relative h-44 overflow-hidden scrollbar-hide border-b border-surface-border" [class]="project.accent">
-        @if (project.media[0].type === 'video') {
-        <video class="h-full w-full object-cover" [src]="project.media[0].src" autoplay muted loop playsinline></video>
-        } @else {
-        <img [src]="project.media[0].src" [alt]="project.media[0].alt" class="w-full h-auto object-top" />
-        }
+    <div>
+      <div class="grid gap-6 lg:grid-cols-[1fr_18rem] lg:items-end">
+        <h2 class="max-w-3xl text-balance text-4xl font-semibold leading-[1.02] tracking-[-0.04em] text-foreground-primary sm:text-5xl">
+          Trabajo técnico con contexto real.
+        </h2>
+        <p class="text-sm leading-7 text-foreground-secondary lg:pb-1">
+          Selección de soluciones desarrolladas, integradas y desplegadas.
+        </p>
+      </div>
 
-        @if (project.media.length > 1) {
-        <span class="absolute bottom-2 right-2 rounded-full bg-black/60 px-2 py-0.5 text-xs text-white">
-          +{{ project.media.length - 1 }}
-        </span>
+      <div class="mt-12 border-t border-surface-border">
+        @for (project of projects; track project.title; let i = $index) {
+        <article class="stagger-item grid gap-6 border-b border-surface-border py-8 sm:py-10 lg:grid-cols-[10rem_18rem_1fr] lg:gap-8 lg:py-12">
+          <p class="text-xs font-medium tabular-nums text-foreground-muted">
+            {{ (i + 1).toString().padStart(2, '0') }}
+          </p>
+
+          @if (project.media.length) {
+          <div class="relative aspect-[16/10] overflow-hidden border border-surface-border bg-surface-secondary">
+            @if (project.media[0].type === 'video') {
+            <video class="h-full w-full object-cover" [src]="project.media[0].src" autoplay muted loop playsinline></video>
+            } @else {
+            <img
+              [src]="project.media[0].src"
+              [alt]="project.media[0].alt"
+              class="h-full w-full object-cover object-top"
+              loading="lazy"
+            />
+            }
+          </div>
+          }
+
+          <div class="min-w-0">
+            <div class="flex flex-wrap items-start justify-between gap-3">
+              <h3 class="text-2xl font-semibold leading-tight text-foreground-primary">
+                {{ project.title }}
+              </h3>
+              <p class="text-[0.68rem] font-semibold uppercase tracking-[0.14em] text-foreground-muted">
+                {{ project.period }}
+              </p>
+            </div>
+
+            <p class="mt-4 max-w-2xl text-sm leading-7 text-foreground-secondary">
+              {{ project.description }}
+            </p>
+
+            <div class="mt-5 text-xs leading-6 text-foreground-muted">
+              @for (item of stackPreview(project); track item; let last = $last) {
+              <span class="text-foreground-secondary">{{ item }}</span>
+              @if (!last) { <span class="px-2 text-foreground-muted">/</span> }
+              }
+              @if (stackOverflow(project) > 0) {
+              <span class="px-2 text-foreground-muted">/</span>
+              <span>+{{ stackOverflow(project) }}</span>
+              }
+            </div>
+
+            <button
+              type="button"
+              (click)="openProject(project, projectDialog)"
+              class="group mt-6 inline-flex items-center gap-4 border-b border-brand pb-2 text-sm font-semibold text-foreground-primary transition-colors hover:text-brand focus-ring"
+            >
+              Ver detalles
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                stroke-linecap="round" stroke-linejoin="round"
+                class="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5">
+                <path d="M7 17 17 7M7 7h10v10" />
+              </svg>
+            </button>
+          </div>
+        </article>
         }
       </div>
-      }
-
-      <div class="space-y-4 p-6">
-        <div class="flex items-start justify-between gap-3">
-          <h3 class="text-lg font-semibold text-foreground-primary">{{ project.title }}</h3>
-          <span class="mt-0.5 shrink-0 font-mono text-xs text-foreground-muted">{{ project.period }}</span>
-        </div>
-
-        <p class="line-clamp-2 text-sm leading-6 text-foreground-secondary">{{ project.description }}</p>
-
-        <div class="flex flex-wrap gap-2">
-          @for (item of stackPreview(project); track item) {
-          <span
-            class="rounded-full border border-surface-border bg-surface-secondary px-3 py-1 text-xs text-foreground-secondary">
-            {{ item }}
-          </span>
-          }
-          @if (stackOverflow(project) > 0) {
-          <span
-            class="rounded-full border border-surface-border bg-surface-secondary px-3 py-1 text-xs text-foreground-muted">
-            +{{ stackOverflow(project) }}
-          </span>
-          }
-        </div>
-
-        <div class="flex items-center gap-3 pt-1">
-          <button type="button" (click)="openProject(project, projectDialog)"
-            class="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-brand px-4 py-2.5 text-sm font-medium text-white transition duration-300 hover:bg-brand-hover focus-ring">
-            Ver detalles
-          </button>
-        </div>
-      </div>
-    </article>
-    }
+    </div>
   </div>
 </section>
 
 <dialog #projectDialog (close)="closeProject()"
-  class="m-auto h-[85vh] w-full max-w-7xl overflow-hidden rounded-[1.75rem] border border-surface-border bg-surface-card p-0 backdrop:bg-black/60 backdrop:backdrop-blur-sm">
+  class="project-dialog m-auto h-[calc(100dvh-1rem)] w-[calc(100%-1rem)] max-w-7xl overflow-y-auto border border-surface-border bg-surface p-0 sm:w-[calc(100%-3rem)] lg:h-[88vh] lg:overflow-hidden">
   @if (selectedProject(); as project) {
-  <div class="grid h-full grid-rows-[3fr_2fr] lg:grid-cols-[1.6fr_1fr] lg:grid-rows-1">
-    <div class="relative border-b border-surface-border lg:h-full lg:border-b-0 lg:border-r overflow-hidden"
-      [class]="project.accent">
-
-      <div #mediaScroll [class]="project.platform === 'mobile'
-     ? 'h-full w-full overflow-y-auto scrollbar-hide lg:flex lg:items-center lg:justify-center'
-     : 'h-full w-full overflow-y-auto scrollbar-hide'">
-
-        @if (project.media[activeMediaIndex()].type === 'video') {
-        <video (loadedmetadata)="onMediaLoad($event)" [class]="project.platform === 'mobile'
-      ? ((fillsContainer() ? 'h-full w-full object-cover' : 'w-full h-auto object-top') + ' lg:h-full lg:max-h-[90%] lg:max-w-[320px] lg:w-auto lg:object-contain lg:mx-auto lg:rounded-[1.75rem] lg:border-[5px] lg:border-black/90 lg:shadow-xl')
-      : (fillsContainer() ? 'h-full w-full object-cover' : 'w-full h-auto object-top')"
-          [src]="project.media[activeMediaIndex()].src" autoplay muted loop playsinline controls></video>
-        } @else {
-        <img (load)="onMediaLoad($event)" [src]="project.media[activeMediaIndex()].src"
-          [alt]="project.media[activeMediaIndex()].alt" loading="eager" decoding="async"
-          [class]="project.platform === 'mobile'
-          ? ((fillsContainer() ? 'w-full h-full object-fill' : 'w-full h-auto object-top') + ' transition-opacity duration-150 lg:h-full lg:max-h-[90%] lg:max-w-[320px] lg:w-auto lg:object-contain lg:mx-auto lg:rounded-[1.75rem] lg:border-[5px] lg:border-black/90 lg:shadow-xl')
-          : (fillsContainer() ? 'w-full h-full object-fill' : 'w-full h-auto object-top') + ' transition-opacity duration-150'" />
-        }
-      </div>
-
+  <div class="grid lg:h-full lg:grid-cols-[1.45fr_1fr]">
+    <div
+      class="grid h-[52vh] min-h-[20rem] grid-rows-[3.5rem_minmax(0,1fr)_3.5rem] border-b border-surface-border lg:h-full lg:min-h-0 lg:border-b-0 lg:border-r"
+      [class]="project.accent"
+    >
       @if (project.media.length) {
-      <div
-        class="absolute left-4 top-4 z-10 max-w-[calc(100%-5rem)] rounded-full bg-black/40 px-3.5 py-1.5 backdrop-blur-md">
-        <p class="truncate text-xs font-medium text-white">{{ project.media[activeMediaIndex()].alt }}</p>
+      <div class="flex items-center border-b border-surface-border/70 bg-surface/85 px-4 backdrop-blur-sm">
+        <span class="mr-3 h-px w-5 shrink-0 bg-brand"></span>
+        <p class="truncate text-xs font-medium leading-5 text-foreground-primary">
+          {{ project.media[activeMediaIndex()].alt }}
+        </p>
       </div>
       }
 
-      @if (project.media.length > 1) {
-      <button type="button" (click)="prevMedia(project)" aria-label="Anterior"
-        class="absolute left-4 top-1/2 -translate-y-1/2 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white shadow-lg backdrop-blur-md transition duration-200 hover:bg-black/60 hover:scale-105 focus-ring">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-          stroke-linejoin="round" class="h-5 w-5">
-          <polyline points="15 18 9 12 15 6" />
-        </svg>
-      </button>
-      <button type="button" (click)="nextMedia(project)" aria-label="Siguiente"
-        class="absolute right-4 top-1/2 -translate-y-1/2 z-10 inline-flex h-10 w-10 items-center justify-center rounded-full bg-black/40 text-white shadow-lg backdrop-blur-md transition duration-200 hover:bg-black/60 hover:scale-105 focus-ring">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-          stroke-linejoin="round" class="h-5 w-5">
-          <polyline points="9 18 15 12 9 6" />
-        </svg>
-      </button>
-
-      <div
-        class="absolute bottom-4 left-1/2 z-10 flex -translate-x-1/2 items-center gap-2 rounded-full bg-black/40 px-3 py-2 backdrop-blur-md">
-        @for (item of project.media; track $index) {
-        <button type="button" (click)="setMedia($index)" [attr.aria-label]="'Ir a media ' + ($index + 1)"
-          class="h-1.5 rounded-full transition-all duration-300"
-          [class]="$index === activeMediaIndex() ? 'w-6 bg-white' : 'w-1.5 bg-white/50 hover:bg-white/80'"></button>
+      <div class="relative min-h-0 overflow-hidden">
+        @if (activeMediaIsPortrait()) {
+        <div #mediaScroll class="flex h-full w-full items-center justify-center overflow-hidden px-5 py-4 sm:px-7 sm:py-5">
+          <div
+            class="h-full max-h-full w-auto max-w-full overflow-hidden rounded-[1.5rem] border-[5px] border-surface-border bg-surface-secondary"
+            [style.aspectRatio]="activeMediaAspectRatio()"
+          >
+            @if (project.media[activeMediaIndex()].type === 'video') {
+            <video (loadedmetadata)="onMediaLoad($event)"
+              class="h-full w-auto max-w-full object-contain"
+              [src]="project.media[activeMediaIndex()].src" autoplay muted loop playsinline controls></video>
+            } @else {
+            <img (load)="onMediaLoad($event)" [src]="project.media[activeMediaIndex()].src"
+              [alt]="project.media[activeMediaIndex()].alt" loading="eager" decoding="async"
+              class="h-full w-auto max-w-full object-contain" />
+            }
+          </div>
+        </div>
+        } @else if (activeMediaIsLong()) {
+        <div #mediaScroll class="h-full w-full overflow-y-auto overflow-x-hidden scrollbar-hide">
+          @if (project.media[activeMediaIndex()].type === 'video') {
+          <video (loadedmetadata)="onMediaLoad($event)"
+            class="block h-auto w-full"
+            [src]="project.media[activeMediaIndex()].src" autoplay muted loop playsinline controls></video>
+          } @else {
+          <img (load)="onMediaLoad($event)" [src]="project.media[activeMediaIndex()].src"
+            [alt]="project.media[activeMediaIndex()].alt" loading="eager" decoding="async"
+            class="block h-auto w-full" />
+          }
+        </div>
+        } @else {
+        <div #mediaScroll class="flex h-full w-full items-center justify-center overflow-hidden p-2 sm:p-4">
+          @if (project.media[activeMediaIndex()].type === 'video') {
+          <video (loadedmetadata)="onMediaLoad($event)"
+            class="h-full w-full object-contain"
+            [src]="project.media[activeMediaIndex()].src" autoplay muted loop playsinline controls></video>
+          } @else {
+          <img (load)="onMediaLoad($event)" [src]="project.media[activeMediaIndex()].src"
+            [alt]="project.media[activeMediaIndex()].alt" loading="eager" decoding="async"
+            class="h-full w-full object-contain" />
+          }
+        </div>
         }
       </div>
+
+      @if (project.media.length > 1) {
+      <div class="grid grid-cols-[3.5rem_1fr_3.5rem] items-center border-t border-surface-border/70 bg-surface/45">
+        <button type="button" (click)="prevMedia(project)" aria-label="Imagen anterior"
+          class="mx-auto inline-flex h-9 w-9 items-center justify-center text-foreground-secondary transition-colors duration-200 hover:text-brand focus-ring">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round" class="h-5 w-5">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+        <div class="flex items-center justify-center gap-2">
+          @for (item of project.media; track $index) {
+          <button type="button" (click)="setMedia($index)" [attr.aria-label]="'Ir a media ' + ($index + 1)"
+            class="h-px transition-all duration-300"
+            [class]="$index === activeMediaIndex() ? 'w-7 bg-brand' : 'w-3 bg-foreground-muted/70 hover:bg-foreground-secondary'"></button>
+          }
+        </div>
+        <button type="button" (click)="nextMedia(project)" aria-label="Imagen siguiente"
+          class="mx-auto inline-flex h-9 w-9 items-center justify-center text-foreground-secondary transition-colors duration-200 hover:text-brand focus-ring">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
+            stroke-linejoin="round" class="h-5 w-5">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+      </div>
+      } @else {
+      <div class="border-t border-surface-border/70 bg-surface/45"></div>
       }
 
       <button type="button" (click)="projectDialog.close()" aria-label="Cerrar"
-        class="absolute right-4 top-4 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full border border-surface-border bg-surface-card/90 text-foreground-primary backdrop-blur-md transition duration-300 hover:border-brand/40 hover:bg-white/5 focus-ring lg:hidden">
+        class="absolute right-3 top-3 z-30 inline-flex h-10 w-10 items-center justify-center border border-surface-border bg-surface/95 text-foreground-primary transition-colors duration-300 hover:border-brand/50 hover:text-brand focus-ring sm:right-4 sm:top-4 lg:hidden">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
           stroke-linejoin="round" class="h-4 w-4">
           <line x1="5" y1="5" x2="19" y2="19" />
@@ -132,9 +186,9 @@
         </svg>
       </button>
     </div>
-    <div class="relative flex flex-col overflow-hidden">
+    <div class="relative grid min-h-0 grid-rows-[auto_1fr] bg-surface lg:h-full lg:overflow-hidden">
       <button type="button" (click)="projectDialog.close()" aria-label="Cerrar"
-        class="absolute right-4 top-4 z-10 hidden h-9 w-9 items-center justify-center rounded-full border border-surface-border bg-surface-card text-foreground-primary transition duration-300 hover:border-brand/40 hover:bg-white/5 focus-ring lg:inline-flex">
+        class="absolute right-6 top-6 z-30 hidden h-10 w-10 items-center justify-center border border-surface-border bg-surface text-foreground-primary transition-colors duration-300 hover:border-brand/50 hover:text-brand focus-ring lg:inline-flex">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"
           stroke-linejoin="round" class="h-4 w-4">
           <line x1="5" y1="5" x2="19" y2="19" />
@@ -142,35 +196,35 @@
         </svg>
       </button>
 
-      <div class="flex-1 space-y-6 overflow-y-auto p-6 sm:p-8">
-        <div class="flex flex-wrap items-start justify-between gap-3 pr-10">
-          <h3 class="text-2xl font-semibold text-foreground-primary">{{ project.title }}</h3>
-          <span
-            class="rounded-full border border-surface-border bg-surface-secondary px-3.5 py-1.5 font-mono text-xs text-foreground-muted">
+      <div class="relative z-10 border-b border-surface-border bg-surface px-6 pb-7 pt-7 pr-12 sm:px-8 lg:px-10 lg:pt-8">
+          <p class="text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-brand">
             {{ project.period }}
-          </span>
-        </div>
+          </p>
+          <h3 class="mt-4 text-3xl font-semibold leading-[1.05] tracking-[-0.035em] text-foreground-primary sm:text-4xl">
+            {{ project.title }}
+          </h3>
+      </div>
 
-        <p class="text-sm leading-7 text-foreground-secondary">{{ project.description }}</p>
+      <div #projectInfoScroll class="min-h-0 px-6 pb-8 sm:px-8 lg:overflow-y-auto lg:px-10 lg:pb-10 scrollbar-hide">
+        <p class="mt-7 max-w-xl text-base leading-8 text-foreground-secondary">{{ project.description }}</p>
 
-        <div>
-          <p class="text-xs uppercase tracking-[0.3em] text-foreground-muted">Stack</p>
-          <div class="mt-3 flex flex-wrap gap-2">
+        <div class="mt-9 border-t border-surface-border pt-6">
+          <p class="text-xs font-semibold uppercase tracking-[0.22em] text-foreground-muted">Stack tecnológico</p>
+          <div class="mt-5 grid gap-x-5 sm:grid-cols-2">
             @for (item of project.stack; track item) {
-            <span
-              class="rounded-full border border-surface-border bg-surface-secondary px-3 py-1 text-xs text-foreground-secondary">
+            <p class="border-b border-surface-border py-2.5 text-sm font-medium text-foreground-primary">
               {{ item }}
-            </span>
+            </p>
             }
           </div>
         </div>
 
-        <div>
-          <p class="text-xs uppercase tracking-[0.3em] text-foreground-muted">Lo más relevante</p>
-          <ul class="mt-3 grid gap-2.5 text-sm leading-6 text-foreground-secondary">
+        <div class="mt-9 border-t border-surface-border pt-6 pb-2">
+          <p class="text-xs font-semibold uppercase tracking-[0.22em] text-foreground-muted">Lo más relevante</p>
+          <ul class="mt-5 grid gap-4">
             @for (feature of project.features; track feature) {
-            <li class="flex gap-3">
-              <span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand-light"></span>
+            <li class="grid grid-cols-[1rem_1fr] gap-3 text-sm leading-6 text-foreground-secondary">
+              <span class="mt-[0.65rem] h-px w-3 bg-brand"></span>
               <span>{{ feature }}</span>
             </li>
             }

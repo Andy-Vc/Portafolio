@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ThemeService } from './core/services/theme.service';
 import { AboutComponent } from './features/about/about.component';
 import { CertificatesComponent } from './features/certificates/certificates.component';
 import { ContactComponent } from './features/contact/contact.component';
@@ -27,5 +28,6 @@ import { NavbarComponent } from './layout/navbar/navbar.component';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
+  private readonly themeService = inject(ThemeService);
   readonly title = 'Portfolio';
 }

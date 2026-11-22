@@ -1,12 +1,12 @@
 .glass-panel {
-  background: #18181b;
-  border: 1px solid #27272a;
+  background: var(--color-surface-card);
+  border: 1px solid var(--color-surface-border);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.02);
   backdrop-filter: blur(8px);
 }
 
 .soft-border {
-  border: 1px solid #27272a;
+  border: 1px solid var(--color-surface-border);
 }
 
 .section-shell {
@@ -19,8 +19,7 @@
 
 .focus-ring:focus-visible {
   outline: none;
-  /* box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.35); */
-  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.35);
+  box-shadow: 0 0 0 3px var(--color-brand-glow);
 }
 
 .glow-button {
@@ -28,7 +27,7 @@
 }
 
 .surface-grid {
-  background-image: linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.018) 1px, transparent 1px);
+  background-image: linear-gradient(var(--surface-grid-line, rgba(23, 25, 29, 0.04)) 1px, transparent 1px),
+    linear-gradient(90deg, var(--surface-grid-line, rgba(23, 25, 29, 0.04)) 1px, transparent 1px);
   background-size: 48px 48px;
 }

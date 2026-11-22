@@ -1,25 +1,46 @@
 :root {
-  --color-surface: #09090b;
-  --color-surface-secondary: #111118;
-  --color-surface-card: #17171f;
-  --color-surface-border: #242433;
-  --color-foreground-primary: #f5f5f7;
-  --color-foreground-secondary: #b3b3c2;
-  --color-foreground-muted: #7e7e93;
-  /* --color-brand: #7c3aed; */
-  --color-brand: #dc2626;
-  /* --color-brand-hover: #8b5cf6; */
-  --color-brand-hover: #ef4444;
-  /* --color-brand-accent: #a855f7; */
-  --color-brand-accent: #b91c1c;
-  /* --color-brand-light: #c084fc; */
-  --color-brand-light: #f87171;
-  /* --color-brand-glow: rgba(124, 58, 237, 0.35); */
-  --color-brand-glow: rgba(220, 38, 38, 0.35);
+  --color-surface: #17191d;
+  --color-surface-secondary: #1d2025;
+  --color-surface-card: #22252b;
+  --color-surface-border: #30333a;
+  --color-foreground-primary: #f1f1ef;
+  --color-foreground-secondary: #a5a8af;
+  --color-foreground-muted: #858991;
+  --color-brand: #d66b6b;
+  --color-brand-hover: #e17d7d;
+  --color-brand-accent: #b95656;
+  --color-brand-light: #e6a0a0;
+  --color-brand-glow: rgba(214, 107, 107, 0.22);
+  --surface-grid-line: rgba(255, 255, 255, 0.018);
+  --color-navbar: rgba(23, 25, 29, 0.92);
+  --color-project-viewer: #1d2025;
+  --color-backdrop: rgba(23, 25, 29, 0.82);
   --color-success: #22c55e;
   --color-warning: #f59e0b;
   --color-error: #ef4444;
   --radius-xl: 1.5rem;
   --radius-2xl: 2rem;
   --section-gap: clamp(4rem, 8vw, 7rem);
+}
+
+:root[data-theme="light"] {
+  --color-surface: #f4f3f0;
+  --color-surface-secondary: #ebe9e4;
+  --color-surface-card: #ffffff;
+  --color-surface-border: #e3e1dc;
+  --color-foreground-primary: #171717;
+  --color-foreground-secondary: #666666;
+  --color-foreground-muted: #7a7a76;
+  --color-brand: #c94b4b;
+  --color-brand-hover: #b94343;
+  --color-brand-accent: #a43b3b;
+  --color-brand-light: #d87575;
+  --color-brand-glow: rgba(201, 75, 75, 0.18);
+  --surface-grid-line: rgba(23, 23, 23, 0.04);
+  --color-navbar: rgba(244, 243, 240, 0.92);
+  --color-project-viewer: #ebe9e4;
+  --color-backdrop: rgba(23, 23, 23, 0.72);
+  --color-success: #258b57;
+  --color-warning: #9a6818;
+  --color-error: #b94444;
 }

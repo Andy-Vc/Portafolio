@@ -1,22 +1,40 @@
 <!doctype html>
 <html lang="es">
+
 <head>
   <meta charset="utf-8">
+  <meta name="theme-color" content="#17191D">
+  <script>
+    (function () {
+      var key = 'portfolio-theme';
+      var storedTheme = localStorage.getItem(key);
+      var theme = storedTheme === 'light' || storedTheme === 'dark'
+        ? storedTheme
+        : (window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
+      document.documentElement.setAttribute('data-theme', theme);
+      document.documentElement.style.colorScheme = theme;
+      document.querySelector('meta[name="theme-color"]')?.setAttribute(
+        'content',
+        theme === 'light' ? '#F4F3F0' : '#17191D'
+      );
+    }());
+  </script>
   <title>Portafolio | Full Stack Developer</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Portafolio profesional de Full Stack Developer con estética premium, minimalista y oscura.">
-  <meta name="theme-color" content="#09090B">
+  <meta name="description"
+    content="Portafolio profesional de Full Stack Developer con estética premium, minimalista y oscura.">
 
-  <link rel="icon" href="assets/favicon/icon.svg" type="image/svg+xml">
-  <link rel="icon" href="favicon-red.ico" sizes="any">
-  <link rel="apple-touch-icon" href="assets/favicon/icon-red.png">
+  <link rel="icon" href="/favicon-ico-new.ico" sizes="48x48">
+  <link rel="icon" href="/assets/favicon/icon-new.png" type="image/png">
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <app-root></app-root>
 </body>
+
 </html>
