@@ -1,7 +1,6 @@
-
 <section
     id="inicio"
-    class="section-shell grid min-h-[calc(100vh-4rem)] content-center items-center gap-12 py-20 sm:py-24 lg:grid-cols-[minmax(0,1.32fr)_minmax(18rem,0.68fr)] lg:gap-20 lg:py-28"
+    class="section-shell grid content-center items-center gap-10 py-16 sm:py-20 md:grid-cols-[minmax(0,1.25fr)_minmax(14rem,0.75fr)] md:gap-10 lg:min-h-[min(calc(100vh-4rem),46rem)] lg:grid-cols-[minmax(0,1.32fr)_minmax(18rem,0.68fr)] lg:gap-20 lg:py-28"
     appRevealOnScroll
     (appRevealOnScroll)="visible.set(true)"
     [@sectionReveal]="visible() ? 'visible' : 'hidden'">
@@ -19,7 +18,7 @@
                 Hola, soy Andy Valdivia
             </p>
 
-            <h1 class="text-balance text-[clamp(3.25rem,8vw,6.75rem)] font-semibold leading-[0.92] tracking-[-0.055em] text-foreground-primary">
+            <h1 class="text-balance text-[clamp(3rem,7vw,6.75rem)] font-semibold leading-[0.92] tracking-[-0.055em] text-foreground-primary md:text-[clamp(2.75rem,6.2vw,4.5rem)] lg:text-[clamp(3.25rem,8vw,6.75rem)]">
                 Desarrollo<br>
                 <span class="text-foreground-muted">soluciones digitales.</span>
             </h1>
@@ -31,9 +30,9 @@
             </p>
         </div>
 
-        <div class="mt-9 grid gap-6 border-t border-surface-border pt-6 sm:grid-cols-[11rem_1fr] sm:items-end sm:gap-10">
+        <div class="mt-9 grid gap-4 border-t border-surface-border pt-6 lg:grid-cols-[11rem_1fr] lg:items-end lg:gap-10">
             <p class="text-[0.68rem] font-semibold uppercase leading-5 tracking-[0.24em] text-foreground-muted">
-                Tecnologías<br class="hidden sm:block"> principales
+                Tecnologías<br class="hidden lg:block"> principales
             </p>
             <div class="flex flex-wrap items-center gap-x-6 gap-y-2">
                 @for (tech of ['Java', 'Spring Boot', 'Angular', 'PostgreSQL']; track tech) {
@@ -67,7 +66,7 @@
         </div>
     </div>
 
-    <div class="relative mx-auto w-full max-w-md lg:ml-auto lg:max-w-[31rem]">
+    <div class="relative mx-auto w-full max-w-md md:mx-0 md:max-w-none lg:ml-auto lg:max-w-[31rem]">
         <div class="relative border-l border-t border-surface-border pl-3 pt-3 sm:pl-4 sm:pt-4">
             <div class="absolute -left-px top-0 h-16 w-px bg-brand"></div>
             <picture>
